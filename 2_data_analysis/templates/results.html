@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyse-Ergebnisse</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgba(51, 51, 51, 0.9);
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #bbbbbb;
+      font-size: 16px;
+      padding: 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      text-align: center;
+      padding: 20px 20px;
+      background: rgba(51, 51, 51, 0.9);
+      border-bottom: 2px solid #666;
+      color: #fff;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 150px 20px 40px;
+    }
+
+    .panel {
+      background: rgba(51, 51, 51, 0.9);
+      color: #bbbbbb;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .module-card {
+      background: rgba(51, 51, 51, 0.9);
+      border: 1px solid #666;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .module-card h3 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #fff;
+    }
+
+    .module-card p {
+      margin: 15px 0;
+      opacity: 0.8;
+      color: #ddd;
+    }
+
+    .module-card span {
+      display: inline-block;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      margin: 5px;
+      font-size: 0.8em;
+      color: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(51, 51, 51, 0.9);
+      color: #bbbbbb;
+    }
+
+    .plot-container {
+      text-align: center;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    button {
+      background: #3b3b3b;
+      color: #ececec;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #4a4a4a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Datenanalyse & Statistik</h1>
+    <p>Messdaten Visualisierung — Modul der maazi.de LMU-Tools</p>
+  </header>
+
+  <div class="container">
+
+    <section>
+      <div class="module-card">
+        <h3>Datenanalyse & Statistik-Modul</h3>
+        <p>Einfache Auswertung und Visualisierung von Messdaten für Sensorik und medizinische Geräte.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel" style="margin-top: 20px;">
+        <h2>Statistische Ergebnisse</h2>
+        <table>
+          <tr>
+            <th>Spalte</th>
+            <td>{{ stats.column }}</td>
+          </tr>
+          <tr>
+            <th>Mittelwert</th>
+            <td>{{ stats.mean }}</td>
+          </tr>
+          <tr>
+            <th>Standardabweichung</th>
+            <td>{{ stats.std }}</td>
+          </tr>
+          <tr>
+            <th>Minimum</th>
+            <td>{{ stats.min }}</td>
+          </tr>
+          <tr>
+            <th>Maximum</th>
+            <td>{{ stats.max }}</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <div class="panel plot-container">
+      <h2>Histogram (Verteilung der Daten)</h2>
+      <img src="/data_analysis/static/plots/{{ stats.histogram }}" alt="Histogram Plot">
+    </div>
+
+    <div class="panel plot-container">
+      <h2>Boxplot (Zusammendrung der Verteilung)</h2>
+      <img src="/data_analysis/static/plots/{{ stats.boxplot }}" alt="Boxplot">
+    </div>
+
+    <div style="margin-top: 20px;">
+      <button onclick="window.history.back()">Zurück zu CSV-Datei Laden</button>
+      <button onclick="window.location.href='/data_analysis/'">Neue Analyse durchführen</button>
+      <button onclick="window.location.href='/hp'">Zurück zur Hauptseite</button>
+      <a href="/data_analysis/static/plots/{{ stats.histogram }}" download
+        style="margin-left: 20px; display: inline-block; background: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Download
+        Histogram</a>
+      <a href="/data_analysis/static/plots/{{ stats.boxplot }}" download
+        style="margin-left: 20px; display: inline-block; background: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Download
+        Boxplot</a>
+    </div>
+  </div>
+
+</body>
+
+</html>
