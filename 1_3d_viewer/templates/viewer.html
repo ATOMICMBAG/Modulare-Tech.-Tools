@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D-Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgba(51, 51, 51, 0.9);
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      text-align: center;
+      padding: 20px 20px;
+      background: rgba(51, 51, 51, 0.9);
+      border-bottom: 2px solid #666;
+      color: #fff;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    #viewer {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #viewer canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 10;
+      background: rgba(51, 51, 51, 0.9);
+      padding: 15px;
+      border-radius: 8px;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      width: 220px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .panel2 {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10;
+      background: rgba(51, 51, 51, 0.9);
+      padding: 15px;
+      border-radius: 8px;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      width: 280px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .panel section {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #555;
+      padding-bottom: 10px;
+    }
+
+    .panel section:last-child {
+      border-bottom: none;
+    }
+
+    .panel h3 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    button {
+      background: #3b3b3b;
+      color: #ececec;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    button:hover {
+      background: #3b3b3b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>3D-Viewer für medizinische Bilddaten</h1>
+    <p>Interaktive Model Visualisierung — Modul der maazi.de LMU-Tools</p>
+  </header>
+
+  <div class="panel">
+    <section>
+      <button onclick="window.history.back()">Zurück zu Model Laden</button>
+      <button onclick="window.location.href='/hp'">Zurück zur Hauptseite</button>
+    </section>
+
+    <section>
+      <h3>Navigation</h3>
+      <button id="resetBtn">Reset</button><br>
+      <button id="rotateLeftBtn">Rotate Left</button>
+      <button id="rotateRightBtn">Rotate Right</button><br>
+      <button id="panUpBtn">Pan Up</button>
+      <button id="panDownBtn">Pan Down</button><br>
+      <button id="panLeftBtn">Pan Left</button>
+      <button id="panRightBtn">Pan Right</button><br>
+      <button id="dollyInBtn">Zoom In</button>
+      <button id="dollyOutBtn">Zoom Out</button>
+    </section>
+
+    <section>
+      <h3>Export</h3>
+      <button id="screenshotBtn">Screenshot</button><br>
+      <button id="downloadModelBtn">Modell-Download</button>
+    </section>
+  </div>
+
+  <div class="panel2">
+    <section>
+      <h3>Farb-Einstellungen</h3>
+      <label style="display: block; margin-bottom: 5px;">Modell-Farbe:</label>
+      <input type="color" id="colorPicker" value="#ffffff"><br />
+      <label style="margin-top: 5px;">Sichtbar: <input type="checkbox" id="visibilityToggle" checked></label>
+    </section>
+
+    <section>
+      <h3>Licht-Einstellungen</h3>
+      <button id="switchToDirectional">Directional Light</button>
+      <button id="switchToPoint">Point Light</button>
+      <button id="switchToSpot">Spot Light</button><br>
+      <label style="display: block; margin-top: 5px;">Intensität:</label>
+      <input type="range" id="lightIntensity" min="0" max="10" step="0.1" value="1" style="width: 100%;"><br>
+      <label style="display: block; margin-top: 5px;">Winkel (Angle/Position):</label>
+      <input type="range" id="lightAngle" min="0" max="180" value="45" style="width: 100%;">
+    </section>
+  </div>
+
+  <div id="viewer"></div>
+
+  <!-- Three.js mit ES Modules verwenden -->
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.163.0/build/three.module.js';
+    import { STLLoader } from 'https://unpkg.com/three@0.163.0/examples/jsm/loaders/STLLoader.js?module';
+    import { OBJLoader } from 'https://unpkg.com/three@0.163.0/examples/jsm/loaders/OBJLoader.js?module';
+    import { OrbitControls } from 'https://unpkg.com/three@0.163.0/examples/jsm/controls/OrbitControls.js?module';
+
+    const modelFile = "{{ model_file }}";
+    const ext = modelFile.split('.').pop().toLowerCase();
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x222222);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 100;
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('viewer').appendChild(renderer.domElement);
+
+    let light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 1, 1).normalize();
+    scene.add(light);
+
+    let lightHelper = null;
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    let isDragging = false;
+    let dragPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+
+    function switchLight(type) {
+      scene.remove(light);
+      if (lightHelper) {
+        scene.remove(lightHelper);
+        lightHelper = null;
+      }
+      if (type === 'directional') {
+        light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(1, 1, 1).normalize();
+      } else if (type === 'point') {
+        light = new THREE.PointLight(0xffffff, 1, 1000, 2);
+        light.position.set(1, 1, 1);
+        // Add helper sphere
+        const geometry = new THREE.SphereGeometry(0.5);
+        const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+        lightHelper = new THREE.Mesh(geometry, material);
+        lightHelper.position.copy(light.position);
+        scene.add(lightHelper);
+      } else if (type === 'spot') {
+        light = new THREE.SpotLight(0xffffff, 1, 1000, Math.PI / 4, 0.2, 2);
+        light.position.set(1, 1, 1);
+        // Add helper cone
+        const geometry = new THREE.ConeGeometry(0.5, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        lightHelper = new THREE.Mesh(geometry, material);
+        lightHelper.position.copy(light.position);
+        scene.add(lightHelper);
+      }
+      scene.add(light);
+    }
+
+    function onPointerDown(event) {
+      if (!lightHelper) return;
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const intersects = raycaster.intersectObject(lightHelper);
+      if (intersects.length > 0) {
+        controls.enabled = false; // Disable orbit while dragging
+        isDragging = true;
+      }
+    }
+
+    function onPointerMove(event) {
+      if (!isDragging || !lightHelper) return;
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const intersection = new THREE.Vector3();
+      if (raycaster.ray.intersectPlane(dragPlane, intersection)) {
+        lightHelper.position.copy(intersection);
+        light.position.copy(intersection);
+      }
+    }
+
+    function onPointerUp() {
+      isDragging = false;
+      controls.enabled = true; // Re-enable orbit
+    }
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('pointermove', onPointerMove);
+    document.addEventListener('pointerup', onPointerUp);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    let currentObject = null;
+
+    // Event listener für Buttons
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      controls.reset();
+      camera.position.set(0, 0, 100);
+      camera.lookAt(0, 0, 0);
+      controls.update();
+    });
+
+    document.getElementById('rotateLeftBtn').addEventListener('click', () => {
+      const delta = -Math.PI / 18; // 10 degrees left
+      const radius = camera.position.distanceTo(controls.target);
+      const angle = Math.atan2(camera.position.z - controls.target.z, camera.position.x - controls.target.x);
+      const newAngle = angle + delta;
+      camera.position.x = controls.target.x + radius * Math.cos(newAngle);
+      camera.position.z = controls.target.z + radius * Math.sin(newAngle);
+      controls.update();
+    });
+
+    document.getElementById('rotateRightBtn').addEventListener('click', () => {
+      const delta = Math.PI / 18; // 10 degrees right
+      const radius = camera.position.distanceTo(controls.target);
+      const angle = Math.atan2(camera.position.z - controls.target.z, camera.position.x - controls.target.x);
+      const newAngle = angle + delta;
+      camera.position.x = controls.target.x + radius * Math.cos(newAngle);
+      camera.position.z = controls.target.z + radius * Math.sin(newAngle);
+      controls.update();
+    });
+
+    document.getElementById('panUpBtn').addEventListener('click', () => {
+      controls.target.y += 2;
+      camera.position.y += 2;
+      controls.update();
+    });
+
+    document.getElementById('panDownBtn').addEventListener('click', () => {
+      controls.target.y -= 2;
+      camera.position.y -= 2;
+      controls.update();
+    });
+
+    document.getElementById('panLeftBtn').addEventListener('click', () => {
+      controls.target.x -= 2;
+      camera.position.x -= 2;
+      controls.update();
+    });
+
+    document.getElementById('panRightBtn').addEventListener('click', () => {
+      controls.target.x += 2;
+      camera.position.x += 2;
+      controls.update();
+    });
+
+    document.getElementById('dollyInBtn').addEventListener('click', () => {
+      const delta = -2; // Dolly in
+      let radius = camera.position.distanceTo(controls.target);
+      radius += delta;
+      if (radius < 0.1) radius = 0.1;
+      const angle = Math.atan2(camera.position.z - controls.target.z, camera.position.x - controls.target.x);
+      const polar = Math.acos((camera.position.y - controls.target.y) / (camera.position.distanceTo(controls.target)));
+      camera.position.set(
+        controls.target.x + radius * Math.sin(polar) * Math.cos(angle),
+        controls.target.y + radius * Math.cos(polar),
+        controls.target.z + radius * Math.sin(polar) * Math.sin(angle)
+      );
+      controls.update();
+    });
+
+    document.getElementById('dollyOutBtn').addEventListener('click', () => {
+      const delta = 2; // Dolly out
+      let radius = camera.position.distanceTo(controls.target);
+      radius += delta;
+      const angle = Math.atan2(camera.position.z - controls.target.z, camera.position.x - controls.target.x);
+      const polar = Math.acos((camera.position.y - controls.target.y) / (camera.position.distanceTo(controls.target)));
+      camera.position.set(
+        controls.target.x + radius * Math.sin(polar) * Math.cos(angle),
+        controls.target.y + radius * Math.cos(polar),
+        controls.target.z + radius * Math.sin(polar) * Math.sin(angle)
+      );
+      controls.update();
+    });
+
+    document.getElementById('colorPicker').addEventListener('input', (e) => {
+      if (currentObject) {
+        if (currentObject.isMesh) {
+          currentObject.material.color.set(e.target.value);
+        } else if (currentObject.children) {
+          currentObject.children.forEach(child => {
+            if (child.isMesh && child.material) {
+              child.material.color.set(e.target.value);
+            }
+          });
+        }
+      }
+    });
+
+    document.getElementById('visibilityToggle').addEventListener('change', (e) => {
+      if (currentObject) {
+        currentObject.visible = e.target.checked;
+      }
+    });
+
+    document.getElementById('switchToDirectional').addEventListener('click', () => {
+      switchLight('directional');
+    });
+
+    document.getElementById('switchToPoint').addEventListener('click', () => {
+      switchLight('point');
+    });
+
+    document.getElementById('switchToSpot').addEventListener('click', () => {
+      switchLight('spot');
+    });
+
+    document.getElementById('lightIntensity').addEventListener('input', (e) => {
+      light.intensity = parseFloat(e.target.value);
+    });
+
+    document.getElementById('lightAngle').addEventListener('input', (e) => {
+      const val = e.target.value;
+      if (light instanceof THREE.SpotLight) {
+        light.angle = (val / 180) * Math.PI;
+      } else {
+        // Für Directional und Point, Position ändern basierend auf Winkel
+        const angle = (val / 180) * Math.PI;
+        light.position.set(Math.cos(angle), Math.sin(angle), 1).normalize();
+        if (lightHelper) lightHelper.position.copy(light.position);
+      }
+    });
+
+    function download(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('screenshotBtn').addEventListener('click', () => {
+      renderer.domElement.toBlob(blob => download(blob, 'screenshot.png'));
+    });
+
+    document.getElementById('downloadModelBtn').addEventListener('click', () => {
+      const modelPath = '/viewer/static/uploads/' + modelFile;
+      const link = document.createElement('a');
+      link.href = modelPath;
+      link.download = '';
+      link.click();
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    if (ext === 'stl') {
+      const loader = new STLLoader();
+      loader.load(
+        '/viewer/static/uploads/' + modelFile,
+        function (geometry) {
+          const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+          const mesh = new THREE.Mesh(geometry, material);
+          scene.add(mesh);
+          currentObject = mesh;
+          console.log('STL geladen:', mesh);
+          // Zentriere das Objekt
+          geometry.computeBoundingSphere();
+          if (geometry.boundingSphere) {
+            camera.position.set(0, 0, geometry.boundingSphere.radius * 2);
+            controls.target.copy(geometry.boundingSphere.center);
+            controls.update();
+          }
+        },
+        undefined, // onProgress
+        function (error) {
+          console.error('Fehler beim Laden der STL-Datei:', error);
+          alert('Fehler beim Laden der STL-Datei. Prüfen Sie die Konsole für Details.');
+        }
+      );
+    } else if (ext === 'obj') {
+      const loader = new OBJLoader();
+      loader.load(
+        '/viewer/static/uploads/' + modelFile,
+        function (object) {
+          scene.add(object);
+          currentObject = object;
+          console.log('OBJ geladen:', object);
+          // Zentriere das Objekt
+          const box = new THREE.Box3().setFromObject(object);
+          const center = box.getCenter(new THREE.Vector3());
+          camera.position.set(0, 0, box.max.z * 2);
+          controls.target.copy(center);
+          controls.update();
+        },
+        undefined, // onProgress
+        function (error) {
+          console.error('Fehler beim Laden der OBJ-Datei:', error);
+          alert('Fehler beim Laden der OBJ-Datei. Prüfen Sie die Konsole für Details.');
+        }
+      );
+    }
+  </script>
+
+</body>

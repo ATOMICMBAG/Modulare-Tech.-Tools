@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D-Viewer Upload</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 220px 20px 40px;
+        flex: 1;
+      }
+
+      .panel {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        z-index: 10;
+        background: #ffffff;
+        border-radius: 15px;
+        border: 2px solid #666;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin: 10px;
+        padding: 10px;
+      }
+
+      .panel h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #000000;
+      }
+
+      #viewer {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+
+      .module-card {
+        background: #ffffff;
+        color: #000000;
+        border: 1px solid #666;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px 0;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .module-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .module-card h3 {
+        margin-top: 0;
+        font-size: 1.5em;
+        color: #000000;
+      }
+
+      .module-card p {
+        margin: 15px 0;
+        opacity: 0.8;
+        color: #000000;
+      }
+
+      .module-card span {
+        display: inline-block;
+        padding: 8px 12px;
+        background: #ffffff;
+        border-radius: 15px;
+        margin: 5px;
+        font-size: 0.8em;
+        color: #000000;
+      }
+
+      button {
+        background: #000000;
+        color: #ffffff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        margin-right: 8px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background: #333333;
+      }
+
+      input[type="file"] {
+        display: block;
+        margin: 0 auto 20px auto;
+        padding: 10px;
+        background: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #ffffff;
+        border-top: 2px solid #666;
+        color: #000000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="main-nav">
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="logo">
+          <a href="https://maazi.de" target="_self">maazi.de</a>
+        </div>
+        <div class="nav-links">
+          <a href="/toolkit" target="_self">Technische Tools Module</a>
+          <a href="/viewer" target="_self">3D</a>
+          <a href="/data_analysis" target="_self">Statistik</a>
+          <a href="/sim_train" target="_self">Simulation</a>
+          <a href="/audio_anno" target="_self">Audio</a>
+          <a href="/ai" target="_self">KI</a>
+          <a href="/com" target="_self">IoT</a>
+          <a href="/wiki" target="_self">Trends</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="module-card">
+        <h3>Interaktiver 3D-Viewer für medizinische Bilddaten</h3>
+        <p>
+          Interaktiver Browser‑Viewer für DICOM, STL und OBJ, ideal für
+          CT/MRT‑Modelle und 3D‑Druckdaten. Bietet Drehen, Zoomen,
+          Layer‑Steuerung und Upload eigener Modelle. Optional erweiterbar um
+          VR/AR (WebXR) und Annotationen. Backend per Flask + File‑Upload,
+          Frontend mit Three.js. Exportfunktionen wie Screenshot und
+          Modell‑Download inklusive.
+        </p>
+        <br><br>
+        <img src="/static/pic/1_3d_view.jpeg" style="width: 600px;" alt="viewer"></img>
+        <h4>STL Demo Laden und Anzeigen</h4>
+        <button onclick="window.location.href = '/viewer/demo'">
+          <h4>tooth.stl Demo</h4>
+        </button>
+      </div>
+      <!-- Manuelle Auswahl, STL / OBJ / DCM oder DICOM Datei zum Manuellen Laden und Anzeigen -->
+      <div class="module-card">
+        <h4>Eigene Datei Laden und Anzeigen</h4>
+        <p>STL / OBJ / DCM / DICOM</p>
+        <form method="post" enctype="multipart/form-data">
+          <input
+            type="file"
+            name="file"
+            accept=".stl,.obj,.dcm,.dicom"
+            required
+          /><br />
+          <button type="submit">
+            <h4>3d Datei Anzeigen</h4>
+          </button>
+        </form>
+      </div>
+      <button onclick="window.location.href = '/toolkit'">
+        Zurück zu Modulare Technische Tools
+      </button>
+    </div>
+
+    <footer>
+      <p>
+        &copy; 2025 https://maazi.de/toolkit - Modulare Technische Tools für
+        Chirurgische Innovationen
+      </p>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
