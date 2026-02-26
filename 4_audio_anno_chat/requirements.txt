@@ -1,0 +1,4 @@
+Flask
+openai-whisper
+# PyTorch ist die Basis-Bibliothek fuer Whisper und wird fuer die Berechnungen benoetigt
+torch

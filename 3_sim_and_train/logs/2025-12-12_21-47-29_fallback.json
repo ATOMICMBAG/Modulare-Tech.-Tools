@@ -1,0 +1,36 @@
+{
+  "timestamp": 1765572449,
+  "timestamp_pretty": "2025-12-12_21-47-29",
+  "scenario_id": "fallback",
+  "payload": {
+    "scenario_id": "fallback",
+    "events": [
+      {
+        "ts": 2.1755,
+        "type": "place_marker",
+        "x": 0.5013698630136987,
+        "y": 0.6238606770833334,
+        "z": 0,
+        "distance_to_target": 0
+      },
+      {
+        "ts": 8.3075,
+        "type": "place_marker",
+        "x": 0.4123287671232877,
+        "y": 0.26708984375,
+        "z": 0,
+        "distance_to_target": 0
+      }
+    ],
+    "start_time": 2.1755,
+    "end_time": 9.262800000071525
+  },
+  "result": {
+    "duration_s": 7.087300000071526,
+    "avg_distance_mm": 0.0,
+    "events_count": 2,
+    "min_distance_mm": 0.0,
+    "max_distance_mm": 0.0,
+    "std_distance_mm": 0.0
+  }
+}

@@ -1,0 +1,97 @@
+/* Ratgeber Freiwilligenprogramm Styles */
+.highlight-box {
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.calculator {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calculator input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.calculator button {
+    background: #3498db;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.calculator button:hover {
+    background: #2980b9;
+}
+
+.video-section {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-dropdown {
+    margin-bottom: 20px;
+}
+
+.video-dropdown select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    font-size: 1rem;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist li {
+    margin: 10px 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}

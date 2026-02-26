@@ -1,0 +1,55 @@
+{
+  "timestamp": 1766453168,
+  "timestamp_pretty": "2025-12-23_02-26-08",
+  "scenario_id": "baseline_demo",
+  "payload": {
+    "scenario_id": "baseline_demo",
+    "events": [
+      {
+        "ts": 32.187,
+        "type": "place_marker",
+        "x": -0.017950646969231626,
+        "y": 0.138688279959737,
+        "z": 0.03394745810401869,
+        "distance_to_target": 96.64505492033608
+      },
+      {
+        "ts": 32.86669999980926,
+        "type": "place_marker",
+        "x": -0.007482785915576828,
+        "y": 0.10447070004314984,
+        "z": 0.04389800221780738,
+        "distance_to_target": 70.35683226925286
+      },
+      {
+        "ts": 33.499,
+        "type": "place_marker",
+        "x": -0.00734002924783815,
+        "y": 0.07368075455702608,
+        "z": 0.04613272776323817,
+        "distance_to_target": 52.37253800061896
+      },
+      {
+        "ts": 34.39279999995232,
+        "type": "place_marker",
+        "x": -0.001683663127819023,
+        "y": 0.03682410355612397,
+        "z": 0.048017207718919465,
+        "distance_to_target": 49.82059017865586
+      }
+    ],
+    "start_time": 16.911099999904632,
+    "end_time": 36.78769999980926
+  },
+  "result": {
+    "duration_s": 19.87659999990463,
+    "avg_distance_mm": 67.29875384221594,
+    "events_count": 4,
+    "min_distance_mm": 49.82059017865586,
+    "max_distance_mm": 96.64505492033608,
+    "std_distance_mm": 18.700503703334547,
+    "errors_count": 4,
+    "target_radius_mm": 8.0,
+    "success": false
+  }
+}

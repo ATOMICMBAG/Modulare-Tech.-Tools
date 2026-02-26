@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Liver: Basic Marking",
+    "description": "Markieren Sie eine Zielposition auf einem Leber-Placeholder-Modell.",
+    "author": "maazi"
+  },
+  "scene": {
+    "model": "/sim_train/static/models/placeholder_model.glb",
+    "target_point": {"x": 0.02, "y": 0.04, "z": 0.01},
+    "target_radius_mm": 10
+  },
+  "workflow": [
+    {"id": "prep", "label": "Vorbereitung", "instruction": "Zentrieren Sie das Modell und lokalisieren Sie die Zielregion. Zielregion Markieren."},
+    {"id": "place", "label": "Marker setzen", "instruction": "Setzen Sie einen Marker auf die Zielposition."},
+    {"id": "finish", "label": "Abschluss", "instruction": "Beenden und Exportieren Sie die Ergebnisse."}
+  ],
+  "evaluation": {
+    "metrics": ["duration_s", "avg_distance_mm", "errors_count"]
+  }
+}

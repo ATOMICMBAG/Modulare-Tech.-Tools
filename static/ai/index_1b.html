@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ai-frame-1b</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div class="ai-frame-container" id="aiContainer">
+
+    <!-- Navigation mit Menü-Icon -->
+    <nav class="main-nav">
+      <button class="menu-icon" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Dropdown-Menü (AI Tools) -->
+    <div class="ai-dropdown">
+      <button class="ai-dropdown-button" id="dropdownButton" style=" justify-content:space-between;">
+        <div>
+          <a class="glow-on-hover" href="./index_0.html" target="_parent" title="maazi.de"> 🏠︎ model list </a>
+          <a class="glow-on-hover" href="./index_1.html" target="_parent" title="one screen"> 🖥️ </a>
+          <a class="glow-on-hover" href="./index_2.html" target="_parent" title="splitt screen"> 🖥️🖥️ </a>
+        </div>
+        <div>
+          <a class="glow-on-hover" title="menu"> Filtermenü ☰ </a>
+        </div>
+      </button>
+
+      <div class="ai-dropdown-content" id="dropdownContent">
+        <!-- Menüsegmente mit echten Buttons (wie vom CSS vorgesehen) -->
+        <div class="ai-menu-segment" style="flex: 1; text-align: center;">
+          <button style="flex: 1; text-align: center;" data-tab="chat">
+            <a>Chat Models</a>
+          </button>
+          <button style="flex: 1; text-align: center;" data-tab="search">
+            <a>Search Model</a>
+          </button>
+          <button style="flex: 1; text-align: center;" data-tab="local">
+            <a>Local Model</a>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hauptinhalt: inline, aber innerhalb von #ai-frame -->
+    <!-- ACHTUNG: CSS positioniert #ai-frame absolut → daher padding-top nötig -->
+    <div id="ai-frame" style="padding: 25px 25px; overflow-y: auto; height: 100%;">
+
+      <div id="chat" class="tab-content active" style="padding: 1rem;">
+        <h2 style="text-align: center;min-width: 300px; height: 55px;"> Chat AI Models </h2>
+        <input type="text" id="searchInput" class="ai-open-btn" placeholder="⌕ Search" autocomplete="off"
+          style="width: 100% ;">
+        <div class="tool-grid" id="chat-grid"><!-- Chat AI Models -Inhalte -->
+        </div>
+        <div class="tool-grid" id="externchat-grid"><!-- Chat AI Models -Inhalte -->
+        </div>
+      </div>
+
+      <div id="search" class="tab-content" style="padding: 1rem; display: none;">
+        <h2 style="text-align: center;min-width: 300px; height: 55px;"> Search AI Models </h2>
+        <input type="text" id="searchInput" class="ai-open-btn" placeholder="⌕ Search" autocomplete="off"
+          style="width: 100% ;">
+        <div class="tool-grid" id="search-grid"><!-- Search AI Models -Inhalte -->
+        </div>
+        <div class="tool-grid" id="externsearch-grid"><!-- Search AI Models -Inhalte -->
+        </div>
+      </div>
+
+      <div id="local" class="tab-content" style="padding: 1rem; display: none;">
+        <h2 style="text-align: center;min-width: 300px; height: 55px;"> local AI Model </h2>
+        <input type="text" id="searchInput" class="ai-open-btn" placeholder="⌕ Search" autocomplete="off"
+          style="width: 100% ;">
+        <div class="tool-grid" id="local-grid"><!-- local AI Model -Inhalte -->
+        </div>
+      </div>
+
+      <!-- Iframe-Viewer: wird eingeblendet, wenn ein Tool "frame" geöffnet wird -->
+      <div id="iframe-viewer" style="display:none;">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 1rem 0;">
+          <!-- LINKS -->
+          <div class="controls-left" style="flex: 1; text-align: center;">
+          </div>
+          <!-- MITTE -->
+          <div class="controls-center" style="flex: 2; text-align: center;">
+          </div>
+          <!-- RECHTS -->
+          <div class="controls-right" style="text-align: center;">
+            <button class="ai-open-btn" onclick="closeFrame()">Close</button>
+          </div>
+        </div>
+
+        <div style="background:#0b0b0b; border-radius:6px;">
+          <iframe id="tool-frame" src="about:blank" height="800px" width="95%" referrerpolicy="no-referrer"
+            style="border:1; background:#000;"></iframe>
+        </div>
+      </div>
+
+      <div style="display: flex;">
+        <div class="controls-left" style="flex: 1; min-width: 100px; min-height: 40px;">
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display: flex;">
+      <div class="controls-left" style="flex: 1; min-width: 100px; min-height: 40px;">
+      </div>
+    </div>
+
+  </div>
+  <!-- ####################################################################################################################### -->
+
+  <script>
+    // === Tool-Daten (wie in deiner Originalversion) ===
+    const tools = [
+      // === CHAT ===
+      { name: "Khoj", url: "https://khoj.dev", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "Dr. Miro", url: "https://dr.miromind.ai/", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "Turbo seek", url: "https://www.turboseek.io/", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "Doubao", url: "https://www.doubao.com", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "Tian gong", url: "https://www.tiangong.cn", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "Mix MyAI", url: "https://mixmyai.com", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "Ithy", url: "https://ithy.com", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "AIlice", url: "https://searchwithalisia.netlify.app/", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      { name: "T3 Chat", url: "https://t3.chat/", cat: "chat", open_iframe: "yes-open_yes-iframe" },
+      // === SUCHMASCHINEN ===
+      { name: "Andi", url: "https://andisearch.com", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Exa Search", url: "https://exa.ai", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Con sensus", url: "https://consensus.app", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Sci Space", url: "https://typeset.io", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Phind", url: "https://www.phind.com", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Arc Search", url: "https://arc.net", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Web Pilot", url: "https://webpilot.ai", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Deep find", url: "https://deepfind.co", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Monica Search", url: "https://monica.so", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Omnex io", url: "https://omnexio.com", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Think Any", url: "https://thinkany.ai", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Xdash AI", url: "https://xdash.ai", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Waldo", url: "https://waldo.ai", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "uncovr", url: "https://uncovr.app", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Correkt AI", url: "https://correkt.ai/", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Komo", url: "https://komo.ai", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      { name: "Liner", url: "https://liner.ai", cat: "search", open_iframe: "yes-open_yes-iframe" },
+      // === CHAT extern ===
+      { name: "ChatGPT", url: "https://chatgpt.com", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Gemini", url: "https://gemini.google.com", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Microsoft Copilot", url: "https://copilot.microsoft.com", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Kimi", url: "https://kimi.moonshot.cn", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "DeepSeek Chat", url: "https://chat.deepseek.com", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Qwen Chat", url: "https://chat.qwen.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Le Chat Mistral", url: "https://chat.mistral.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Pi", url: "https://pi.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Z.ai", url: "https://z.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "LMArena", url: "https://lmarena.ai/", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Lumigo", url: "https://lumigo.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Sensei", url: "https://www.heysensei.app/", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Farfalle", url: "https://farfalle.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Morphic", url: "https://morphic.sh", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Lumo", url: "https://lumo.proton.me/", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Msty", url: "https://msty.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Miku AI", url: "https://hellomiku.com", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Venice", url: "https://venice.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Duck.ai", url: "https://duck.ai", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      { name: "Kagi FastGPT", url: "https://kagi.com/fastgpt", cat: "externchat", open_iframe: "yes-open_no-iframe" },
+      // === SUCHMASCHINEN extern ===
+      { name: "Perplexity", url: "https://www.perplexity.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "You.com", url: "https://you.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Kagi Assistant", url: "https://kagi.com/assistant", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "DuckDuck Go", url: "https://duckduckgo.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Brave Search", url: "https://search.brave.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Metaso", url: "https://metaso.cn", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Heurist Search", url: "https://heurist.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Lepton Search", url: "https://lepton.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Genspark", url: "https://genspark.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Devv AI", url: "https://devv.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Aye Soul", url: "https://ayesoul.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "iAsk Ai", url: "https://iask.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Felo", url: "https://felo.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Poe Web Search", url: "https://poe.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "ChatGPT Search", url: "https://chatgpt.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Gemini Deep Res", url: "https://gemini.google.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "ChatGPT Deep Res", url: "https://chatgpt.com", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "U14 Deep Research", url: "https://research.u14.app/", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Search With Alisia", url: "https://kragent.ai", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Mistral Perflexity AI", url: "https://huggingface.co/spaces/ginigen/Mistral-Perflexity", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "Perplexed", url: "https://d37ozmhmvu2kcg.cloudfront.net/", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      { name: "AI Hay", url: "https://ai-hay.vn/", cat: "externsearch", open_iframe: "yes-open_no-iframe" },
+      // === maazi ===
+      { name: "AI Maazi", url: "https://ai.maazi.de/", cat: "local", open_iframe: "yes-open_yes-iframe" },
+      // === Local ===
+      { name: "ChatLima", url: "https://github.com/LMLK-seal/LLModel", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Llama Res.", url: "https://github.com/meta-llama/llama-models", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Rabbit Holes", url: "https://github.com/AsyncFuncAI/rabbitholes", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Ask PY", url: "https://github.com/pengfeng/ask.py", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Local Plexity", url: "https://github.com/legraphista/localplexity", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Scira", url: "https://openalternative.co/scira", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Open Perplex", url: "https://pypi.org/project/openperplex/", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Kobold Cpp", url: "https://github.com/LostRuins/koboldcpp", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Chat UI", url: "https://github.com/huggingface/chat-ui", cat: "local", open_iframe: "yes-open_no-iframe" },
+      { name: "Langgraph AI", url: "https://github.com/langchain-ai/langgraph", cat: "local", open_iframe: "yes-open_no-iframe" },
+    ];
+
+    // === DOM-Referenzen ===
+    const dropdownBtn = document.getElementById('dropdownButton');
+    const dropdownContent = document.getElementById('dropdownContent');
+    const searchInput = document.getElementById('searchInput');
+
+    // === Dropdown Toggle ===
+    dropdownBtn.addEventListener('click', () => {
+      dropdownContent.classList.toggle('active');
+      dropdownBtn.classList.toggle('active');
+    });
+
+    // === Tab-Wechsel ===
+    document.querySelectorAll('[data-tab]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.dataset.tab;
+        document.querySelectorAll('.tab-content').forEach(el => {
+          el.style.display = 'none';
+        });
+        document.getElementById(tabId).style.display = 'block';
+        dropdownContent.classList.remove('active');
+        dropdownBtn.classList.remove('active');
+      });
+    });
+
+    // === Vollbild ===
+    function toggleFullscreen() {
+      const container = document.getElementById('aiContainer');
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (container.requestFullscreen) container.requestFullscreen();
+        else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+        container.classList.add('fullscreen');
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        container.classList.remove('fullscreen');
+      }
+      dropdownContent.classList.remove('active');
+      dropdownBtn.classList.remove('active');
+    }
+
+    // === Menü-Icon öffnet Dropdown ===
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      dropdownBtn.click();
+    });
+
+    // === Helfer: Öffnet Link im iframe-Viewer ===
+    function openInFrame(url) {
+      const viewer = document.getElementById('iframe-viewer');
+      const frame = document.getElementById('tool-frame');
+      viewer.style.display = 'block';
+      frame.src = url;
+      // Scroll viewer in Sicht (falls nötig)
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Closedropdown
+      dropdownContent.classList.remove('active');
+      dropdownBtn.classList.remove('active');
+    }
+
+    function closeFrame() {
+      const viewer = document.getElementById('iframe-viewer');
+      const frame = document.getElementById('tool-frame');
+      frame.src = 'about:blank';
+      viewer.style.display = 'none';
+      // Scroll viewer in Sicht (falls nötig)
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // === Render-Funktion: zeigt zwei Aktionen pro Tool (open + frame) ===
+    function render(category, query = '') {
+      const container = document.getElementById(`${category}-grid`);
+      const filtered = tools
+        .filter(t => t.cat === category && (!query || t.name.toLowerCase().includes(query.toLowerCase())))
+        .map(t => {
+          const safeName = t.name.replace(/"/g, '&quot;');
+          if (t.url) {
+            const buttons = t.open_iframe === 'yes-open_yes-iframe'
+              ? `<button class="ai-open-btn" onclick="openInFrame('${t.url.replace(/'/g, "%27")}')"> frame </button>
+                 <a class="ai-open-btn" href="${t.url}" target="_blank" rel="noopener noreferrer"> open </a>`
+              : `<a class="ai-open-btn" href="${t.url}" target="_blank" rel="noopener noreferrer"> open </a>`;
+
+            return `
+              <div style="padding:0.2rem; background:#1a1a1a; border-radius:6px; margin:0.2rem 0; display:flex; justify-content:space-between; align-items:center; gap:0.2rem;">
+                <div style="flex:1;">
+                  <a href="${t.url}" target="_blank" rel="noopener noreferrer" style="color:#f5f5f5; text-decoration:none; font-weight:600;">${safeName}</a>
+                </div>
+                <div style="display:flex; gap:0.5rem;controls-right">
+                  ${buttons}
+                </div>
+              </div>
+            `;
+          } else {
+            return `<div style="padding:0.5rem; color:#888;">${safeName}</div>`;
+          }
+        })
+        .join('');
+      container.innerHTML = filtered || '<div style="padding:0.5rem; color:#888;">Keine Tools gefunden.</div>';
+    }
+
+    // === Initiale Anzeige ===
+    ['chat', 'search', 'local', 'externchat', 'externsearch'].forEach(cat => render(cat));
+
+    // === Live-Suche ===
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim();
+      ['chat', 'search', 'local', 'externchat', 'externsearch'].forEach(cat => render(cat, q));
+    });
+
+    // === Initial Zustand: Dropdown eingeklappt ===
+    dropdownContent.classList.remove('active');
+    dropdownBtn.classList.remove('active');
+  </script>
+</body>
+
+</html>

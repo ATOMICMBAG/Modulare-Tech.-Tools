@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>maazi.de - Medizintechnik Innovationen</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        width: 75vw;
+        max-width: 1200px;
+        margin: 0 auto;
+        margin-bottom: 50px;
+        padding: 220px 20px 40px;
+        flex: 1;
+      }
+
+      .module-card {
+        background: #ffffff;
+        color: #000000;
+        border: 1px solid #666;
+        border-radius: 10px;
+        padding: 40px;
+        margin: 15px 0;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .module-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .module-card h3 {
+        margin-top: 0;
+        font-size: 1.5em;
+        color: #000000;
+      }
+
+      .module-card p {
+        margin: 15px 0;
+        opacity: 0.8;
+        color: #000000;
+      }
+
+      .module-card span {
+        display: inline-block;
+        padding: 8px 12px;
+        background: #ffffff;
+        border-radius: 15px;
+        margin: 5px;
+        font-size: 0.8em;
+        color: #000000;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #000000;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background 0.3s;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        background: #333333;
+      }
+
+      .btn2 {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #7e7e7e;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background 0.3s;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .btn2:hover {
+        background: #575757;
+      }
+
+      .coming-soon {
+        background: rgba(100, 100, 100, 0.9) !important;
+        cursor: default;
+        opacity: 0.6;
+      }
+
+      .coming-soon .btn {
+        background: #555;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #ffffff;
+        border-top: 2px solid #666;
+        color: #000000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="main-nav">
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="logo">
+          <a href="https://maazi.de" target="_self">maazi.de</a>
+        </div>
+        <div class="nav-links">
+          <a href="/toolkit" target="_self">Technische Tools Module</a>
+          <a href="/viewer" target="_self">3D</a>
+          <a href="/data_analysis" target="_self">Statistik</a>
+          <a href="/sim_train" target="_self">Simulation</a>
+          <a href="/audio_anno" target="_self">Audio</a>
+          <a href="/ai" target="_self">KI</a>
+          <a href="/com" target="_self">IoT</a>
+          <a href="/wiki" target="_self">Trends</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="module-card" style="text-align: left">
+        <h3>Hiring Project</h3>
+
+        <p>Als zentrales Beispiel möchte ich das Bewerberprojekt</p>
+
+        <a href="/toolkit" class="btn"
+          >🔗 Modulare Technische Tools für Chirurgische Innovationen</a
+        >
+
+        <p>
+          vorstellen. Die Architektur ist bewusst modular gehaltenund umfansst
+          u.a.:
+        </p>
+
+        <ul>
+          <li>3D-Viewer Modelle</li>
+          <li>Datenanalyse und Statistikmodul</li>
+          <li>3D-Simulation und Trainingsszenarien</li>
+          <li>Audio Annotation mit KI gestützte Analyse</li>
+          <li>KI-Chatfunktionen und Analyse</li>
+          <li>RSS-Feeds der medizinischen Technologie und Forschung</li>
+          <li>Schnittstellen zu externen Geräten</li>
+        </ul>
+
+        <p>
+          Das Projekt zeigt komplexe technische Anforderungen in funktionale,
+          praxisnahe Lösungen zu überführen, ermöglicht Erweiterungen wie VR/AR
+          Integration und demonstrtriert Expertise in:
+        </p>
+
+        <ul>
+          <li>Python-basierten Web-Entwicklungen (Flask, modulares Design)</li>
+          <li>Datenanalyse und Visualisierung (Pandas, Matplotlib)</li>
+          <li>KI-Integration (Whisper AI für Spracherkennung, ML-Workflows)</li>
+          <li>3D-Modelle und VR/AR-Visualisierung (Three.js, STL/DICOM)</li>
+          <li>IoT-Anbindungen (Geräte-Management, API-Integration)</li>
+          <li>DevOps-Aspekte (Deployment auf VPS, Nginx/Apache Proxy)</li>
+        </ul>
+
+        <p>&nbsp;</p>
+
+        <h3>Darlegung der Modularen Technischen Tools im Web-Toolkit</h3>
+
+        <p>1. Module als KIS-Basis:</p>
+
+        <p>
+          Diese Module sind modular, webbasiert und laufen auf deinem eigenen
+          Server (z. B. maazi.de/hp). Sie bilden bereits viele typische
+          KIS-Funktionen ab und sind technisch offen für Erweiterungen und
+          Schnittstellen.
+        </p>
+
+        <ul>
+          <li>3D-Viewer Modelle</li>
+          <li>Datenanalyse und Statistikmodul</li>
+          <li>3D-Simulation und Trainingsszenarien</li>
+          <li>Audio Annotation mit KI gestützte Analyse</li>
+          <li>KI-Chatfunktionen und Analyse</li>
+          <li>RSS-Feeds der medizinischen Technologie und Forschung</li>
+          <li>Schnittstellen zu externen Geräten</li>
+        </ul>
+
+        <p>2. Skizze: Modull Integration in KIS-Moduls</p>
+
+        <img
+          src="/static/KIS.svg"
+          alt="KIS Modul Architektur"
+          style="width: 850px; height: 1150px"
+        />
+
+        <p>
+          Modulare Plattform, die verschiedene medizinische Funktionen abbildet.
+          Schnittstellen: APIs (REST/SOAP), HL7/FHIR und ISiK sorgen für den
+          Datenaustausch mit externen Systemen (Labor, Radiologie, Geräte).
+        </p>
+        <p>
+          Module: Die entwickelten Plug-ins sind typische KIS-Komponenten.
+          Kommunikationsarten: Schnittstellen können uni- oder bidirektional
+          Daten übertragen.
+        </p>
+        <p>
+          Ziele: Interoperabilität (Kompatibilität mit anderen Systemen),
+          Datensicherheit (TLS, OAuth, DSGVO), Automatisierung (weniger manuelle
+          Arbeit).
+        </p>
+
+        <br /><br />
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        &copy; 2025 https://maazi.de/toolkit - Modulare Technische Tools für
+        Chirurgische Innovationen
+      </p>
+    </footer>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

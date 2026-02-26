@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>maazi.de LMU - Modulares Toolkit</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 75vw;
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-bottom: 50px;
+      padding: 220px 20px 40px;
+      flex: 1;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .module-card {
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #666;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .module-card h3 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #000000;
+    }
+
+    .module-card p {
+      margin: 15px 0;
+      opacity: 0.8;
+      color: #000000;
+    }
+
+    .module-card span {
+      display: inline-block;
+      padding: 8px 12px;
+      background: #ffffff;
+      border-radius: 15px;
+      margin: 5px;
+      font-size: 0.8em;
+      color: #000000;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #000000;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #333333;
+    }
+
+    .coming-soon {
+      background: rgba(100, 100, 100, 0.9) !important;
+      cursor: default;
+      opacity: 0.6;
+    }
+
+    .coming-soon .btn {
+      background: #333333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ffffff;
+      border-top: 2px solid #666;
+      color: #000000;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="main-nav">
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="logo">
+        <a href="https://maazi.de" target="_self">maazi.de</a>
+      </div>
+      <div class="nav-links">
+        <a href="/toolkit" target="_self">Technische Tools Module</a>
+        <a href="/viewer" target="_self">3D</a>
+        <a href="/data_analysis" target="_self">Statistik</a>
+        <a href="/sim_train" target="_self">Simulation</a>
+        <a href="/audio_anno" target="_self">Audio</a>
+        <a href="/ai" target="_self">KI</a>
+        <a href="/com" target="_self">IoT</a>
+        <a href="/wiki" target="_self">Trends</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h3>Modulare Technische Tools für Chirurgische Innovationen</h3>
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <h3>3D-Viewer für medizinische Bilddaten</h3>
+        <p>Interaktiver Browser‑Viewer für DICOM, STL und OBJ, ideal für CT/MRT‑Modelle und 3D‑Druckdaten.
+          Bietet Drehen, Zoomen, Layer‑Steuerung und Upload eigener Modelle.
+          Optional erweiterbar um VR/AR (WebXR) und Annotationen.
+          Backend per Flask + File‑Upload, Frontend mit Three.js.
+          Exportfunktionen wie Screenshot und Modell‑Download inklusive.</p>
+        <span>| Three.js |</span>
+        <span>| DICOM |</span>
+        <span>| WebXR |</span>
+        <br><br>
+        <img src="/static/pic/1_3d_view.jpeg" style="width: 250px;" alt="viewer"></img>
+        <a href="/viewer/" class="btn">Zum Modul</a>
+      </div>
+
+      <div class="module-card">
+        <h3>Datenanalyse & Statistik-Modul</h3>
+        <p>Einfacher Upload von CSV/XLSX‑Messdaten mit automatischer Analyse.
+          Berechnung zentraler Werte wie Mittelwert, Standardabweichung & Verteilungen.
+          Visualisierung per Histogramm, Boxplot oder Diagramm‑Export.
+          Flask‑Backend mit Pandas/NumPy, Frontend zur Funktionsauswahl.
+          Ergebnisse als Bild oder CSV herunterladbar.</p>
+        <span>| Pandas |</span>
+        <span>| Matplotlib |</span>
+        <span>| CSV |</span>
+        <br><br>
+        <img src="/static/pic/2_data_stat.jpeg" style="width: 250px;" alt="data_analysis"></img>
+        <a href="/data_analysis/" class="btn">Zum Modul</a>
+      </div>
+
+      <div class="module-card">
+        <h3>Simulations- und Trainings-Modul</h3>
+        <p>Browserbasierte Mikrosimulation chirurgischer Schritte‑für‑Schritt‑Workflow.
+          Interaktive Anatomie‑Modelle, Werkzeugpfade, Navigation & Manipulation.
+          Optional VR/AR‑Integration für immersive Trainingsszenarien.
+          Automatische Leistungsanalyse (Zeit, Genauigkeit, Fehlerquote).
+          Modular erweiterbar per JSON‑Szenarien und API‑Schnittstellen.</p>
+        Kontrollen.</p>
+        <span>| Three.js |</span>
+        <span>| GLTF/GLB |</span>
+        <span>| WebXR VR/AR |</span>
+        <br><br>
+        <img src="/static/pic/3_3d_sim.jpeg" style="width: 250px;" alt="sim_train"></img>
+        <a href="/sim_train/" class="btn">Zum Modul</a>
+      </div>
+
+      <div class="module-card">
+        <h3>Audio-Annotation & Kollaboration</h3>
+        <p>Ermöglicht das Aufzeichnen und Hinterlegen von Audio‑Kommentaren zu Daten & Modellen.
+          Upload via Browser, Speicherung im Backend, vorbereitet für Whisper‑KI‑Transkription.
+          Team‑Funktionen wie Notizen, Aufgaben und Chat (erweiterbar).
+          Frontend nutzt MediaRecorder‑API mit Sicherheitscheck.
+          Backend verarbeitet Audio‑Uploads und verwaltet Aufnahmen.</p>
+        <span>| WebRTC |</span>
+        <span>| Realtime |</span>
+        <span>| Whisper AI |</span>
+        <br><br>
+        <img src="/static/pic/4_audio.jpeg" style="width: 250px;" alt="audio_anno"></img>
+        <a href="/audio_anno/" class="btn">Zum Modul</a>
+      </div>
+
+      <div class="module-card">
+        <h3>KI-Demo-Modul</h3>
+        <p>Integrierter KI‑Chat über eingebettete Open‑WebUI‑Oberfläche.
+          Unterstützt verschiedene lokale oder extern angebundene LLMs.
+          Dient als Test‑ und Demonstrationsumgebung für KI‑Interaktion.
+          Einbettung über IFrame innerhalb eines Flask‑Blueprints.
+          Sofort erreichbar über /ai/ für KI‑gestützte medizinische Queries.</p>
+        <span>| Open-WebUI |</span>
+        <span>| OpenAI-like |</span>
+        <span>| LLM Models |</span>
+        <br><br>
+        <img src="/static/pic/5_ai.jpeg" style="width: 250px;" alt="ai"></img>
+        <a href="/ai/" class="btn">Zum Modul</a>
+      </div>
+
+      <div class="module-card">
+        <h3>Schnittstellen-Modul (IoT)</h3>
+        <p>Anbindung externer Geräte wie Duet3D‑Drucker oder medizinischer Sensor‑Hubs.
+          Statusabfrage über REST‑APIs, inkl. simulierten KI‑Wartungsprognosen.
+          Frontend zeigt Geräteübersicht, Status‑Buttons & AI‑Predict‑Reports.
+          Backend kommuniziert mit Gerät‑APIs und stellt Status‑Routen bereit.
+          Erweiterbar um MQTT, Live‑Events oder komplexere Geräte‑Workflows.</p>
+        <span>| MQTT |</span>
+        <span>| REST API |</span>
+        <span>| AI-Geräte |</span>
+        <br><br>
+        <img src="/static/pic/6_Iot.jpeg" style="width: 250px;" alt="com"></img>
+        <a href="/com/" class="btn">Zum Modul</a>
+      </div>
+
+      <div class="module-card">
+        <h3>Aktuelle Artikel — Trends und Neuheiten aus Medizin und Technologie</h3>
+        <p>Automatisches Sammeln aktueller Trends aus medizinischen RSS‑Feeds.
+          Unterstützt Google News Medical & NCBI/PubMed ohne Scraping.
+          Anzeige der Artikel inkl. Titel, Summary, Quelle & Link.
+          Leicht erweiterbar um Bookmarks, Tags oder Filter.
+          Ideal für schnelle Übersicht über Forschung & Technologien. Ein Entdeckermodul für neue Themen</p>
+        <span>| RSS Feeds |</span>
+        <span>| Google News |</span>
+        <span>| PubMed |</span>
+        <br><br>
+        <img src="/static/pic/7_rss.jpeg" style="width: 250px;" alt="wiki"></img>
+        <a href="/wiki/" class="btn">Zum Modul</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 https://maazi.de/toolkit - Modulare Technische Tools für Chirurgische Innovationen</p>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+
+</html>

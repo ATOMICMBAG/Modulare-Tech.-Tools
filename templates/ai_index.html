@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>maazi.de LMU - KI-Demo-Modul</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 220px 20px 40px;
+        flex: 1;
+      }
+
+      .panel {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        z-index: 10;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        border: 2px solid #666;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin: 10px;
+        padding: 10px;
+      }
+
+      .panel h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #000000;
+      }
+
+      #viewer {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+
+      .module-card {
+        background: #ffffff;
+        color: #000000;
+        border: 1px solid #666;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px 0;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .module-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .module-card h3 {
+        margin-top: 0;
+        font-size: 1.5em;
+        color: #000000;
+      }
+
+      .module-card p {
+        margin: 15px 0;
+        opacity: 0.8;
+        color: #000000;
+      }
+
+      .module-card span {
+        display: inline-block;
+        padding: 8px 12px;
+        background: #ffffff;
+        border-radius: 15px;
+        margin: 5px;
+        font-size: 0.8em;
+        color: #000000;
+      }
+
+      button {
+        background: #000000;
+        color: #ffffff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        margin-right: 8px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background: #333333;
+      }
+
+      input[type="file"] {
+        display: block;
+        margin: 0 auto 20px auto;
+        padding: 10px;
+        background: #4a4a4a;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .start {
+        background: rgba(85, 85, 85, 0.9);
+        border: none;
+        color: white;
+        padding: 10px 50px 10px 50px;
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 20px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .start:hover {
+        opacity: 1;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #ffffff;
+        border-top: 2px solid #666;
+        color: #000000;
+      }
+
+      iframe {
+        border: 1px solid black;
+        width: 90%;
+        height: 600px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="main-nav">
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="logo">
+          <a href="https://maazi.de" target="_self">maazi.de</a>
+        </div>
+        <div class="nav-links">
+          <a href="/toolkit" target="_self">Technische Tools Module</a>
+          <a href="/viewer" target="_self">3D</a>
+          <a href="/data_analysis" target="_self">Statistik</a>
+          <a href="/sim_train" target="_self">Simulation</a>
+          <a href="/audio_anno" target="_self">Audio</a>
+          <a href="/ai" target="_self">KI</a>
+          <a href="/com" target="_self">IoT</a>
+          <a href="/wiki" target="_self">Trends</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="module-card">
+        <h3>KI-Demo-Modul</h3>
+        <p>https://ai.maazi.de/ - 6x CPU KI</p>
+        <p>
+          Integrierter KI‑Chat über eingebettete Open‑WebUI‑Oberfläche.
+          Unterstützt verschiedene lokale oder extern angebundene LLMs. Dient
+          als Test‑ und Demonstrationsumgebung für KI‑Interaktion. Einbettung
+          über IFrame innerhalb eines Flask‑Blueprints. Sofort erreichbar über
+          /ai/ für KI‑gestützte medizinische Queries.
+        </p>
+        <iframe
+          id="ai.maazi.de"
+          title="ai.maazi.de"
+          name="ai.maazi.de"
+          width="auto"
+          height="auto"
+          src="https://ai.maazi.de/"
+        ></iframe>
+        <button
+          onclick="window.open('https://ai.maazi.de/', '_blank')"
+          style="margin: 10px"
+        >
+          Open on ai.maazi.de
+        </button>
+      </div>
+      <div class="module-card">
+        <div class="modules-grid">
+          <h4>Schlüsselmerkmale über Open WebUI (GitHub)</h4>
+          <p>
+            Mühelose Einrichtung: Installieren Sie nahtlos mit Docker oder
+            Kubernetes (kubectl, kustomize oder helm) für ein unkompliziertes
+            Erlebnis mit Unterstützung für beide und getaggte
+            Images.:ollama:cuda
+          </p>
+          <p>
+            Ollama/OpenAI-API-Integration: Integrieren Sie mühelos
+            OpenAI-kompatible APIs für vielseitige Gespräche neben
+            Ollama-Modellen. Passen Sie die OpenAI-API-URL an, um sie mit
+            LMStudio, GroqCloud, Mistral, OpenRouter und mehr zu verbinden.
+          </p>
+          <p>
+            Granulare Berechtigungen und Benutzergruppen: Indem wir
+            Administratoren erlauben, detaillierte Benutzerrollen und
+            Berechtigungen zu erstellen, gewährleisten wir eine sichere
+            Benutzerumgebung. Diese Granularität erhöht nicht nur die
+            Sicherheit, sondern ermöglicht auch maßgeschneiderte
+            Nutzererfahrungen, die ein Gefühl von Eigenverantwortung und
+            Verantwortung unter den Nutzern fördern.
+          </p>
+          <p>
+            Responsives Design: Genießen Sie ein nahtloses Erlebnis auf
+            Desktop-PCs, Laptops und mobilen Geräten.
+          </p>
+          <p>
+            Progressive Web App (PWA) für Mobilgeräte: Genießen Sie ein native
+            app-ähnliches Erlebnis auf Ihrem mobilen Gerät mit unserer PWA, die
+            Offline-Zugriff auf Localhost und eine nahtlose Benutzeroberfläche
+            bietet.
+          </p>
+
+          <p>Weitere Informationen auf GitHub</p>
+          <button
+            onclick="
+              window.open('https://github.com/open-webui/open-webui', '_blank')
+            "
+          >
+            https://github.com/open-webui/open-webui
+          </button>
+        </div>
+      </div>
+      <button onclick="window.location.href = '/toolkit'">
+        Zurück zu Modulare Technische Tools
+      </button>
+    </div>
+
+    <footer>
+      <p>
+        &copy; 2025 https://maazi.de/toolkit - Modulare Technische Tools für
+        Chirurgische Innovationen
+      </p>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

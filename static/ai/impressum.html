@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maazi</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* Reset and full-height */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* Container: full viewport, zero gaps */
+        .container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 77vw;
+      height: 100vh;
+      display: grid;
+      margin: 77px;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0;
+        }
+
+        /* Make any iframe fill its grid cell without borders/gaps */
+        .container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+            margin: 5% 0;
+            padding: 0;
+        }
+
+        /* Optional: remove default focus outline but keep accessibility via :focus-visible in browsers that support it */
+        .container iframe:focus {
+            outline: none;
+        }
+
+        .container iframe:focus-visible {
+            outline: 2px solid rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Impressum</h2>
+
+        <p><strong>Angaben gemäß § 5 Telemediengesetz (TMG):</strong></p>
+
+        <p>
+            [info@maazi.de]<br>
+            Deutschland
+        </p>
+
+        <p>
+            <strong>Kontakt:</strong><br>
+            E-Mail: [info@maazi.de]
+        </p>
+
+        <p>
+            <strong>Haftungsausschluss:</strong><br>
+            Die Inhalte dieser Webseite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit
+            und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Die Webseite verlinkt auf externe
+            Dienste Dritter; für deren Inhalte ist allein der jeweilige Anbieter verantwortlich. Es wird keine
+            Haftung für Schäden übernommen, die sich aus der Nutzung oder Nichtnutzung der bereitgestellten
+            Informationen ergeben.
+        </p>
+
+        <p>
+            <strong>Urheberrecht:</strong><br>
+            Die Inhalte dieser Seite (Texte, Grafiken, Layout) unterliegen dem deutschen Urheberrecht. Die
+            Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des
+            Urheberrechts bedürfen der schriftlichen Zustimmung des Autors.
+        </p>
+
+        <p>
+            <strong>Keine kommerzielle Nutzung:</strong><br>
+            Diese Webseite dient ausschließlich privaten, nicht-kommerziellen Zwecken. Es erfolgt keine Werbung,
+            kein Verkauf und keine Gewinnerzielungsabsicht.
+        </p>
+
+        <div>
+            <h3>Back</h3>
+            <a href="./index_0.html" target="_parent" class="ai-open-btn" style="width: 77px;margin: 5% 0;"> ◀ </a>
+            <h3></h3>
+        </div>
+
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

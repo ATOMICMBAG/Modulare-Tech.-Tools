@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Baseline: Marker Placement",
+    "description": "Ein einfaches Training zum Setzen eines Punktes auf eine Zielposition.",
+    "author": "updated"
+  },
+  "scene": {
+    "model": "/sim_train/static/models/placeholder_model.glb",
+    "target_point": {"x": 0.0, "y": 0.05, "z": 0.0},
+    "target_radius_mm": 8
+  },
+  "workflow": [
+    {"id": "prep", "label": "Vorbereitung", "instruction": "Betrachten Sie das Modell und lokalisieren Sie den Zielpunkt. Marker setzen"},
+    {"id": "place_marker", "label": "Marker setzen", "instruction": "Setzen Sie den Marker auf die Zielposition."},
+    {"id": "finish", "label": "Abschluss", "instruction": "Exportieren Sie die Ergebnisse."}
+  ],
+  "evaluation": {
+    "metrics": ["duration_s", "avg_distance_mm"]
+  }
+}

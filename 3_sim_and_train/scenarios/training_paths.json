@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Path Training: Track Following",
+    "description": "Ein einfaches Trainingsszenario, bei dem ein Punkt auf einem Pfad entlang gesetzt werden soll.",
+    "author": "maazi"
+  },
+  "scene": {
+    "model": "/sim_train/static/models/placeholder_model.glb",
+    "target_point": {"x": 0.0, "y": 0.05, "z": 0.0},
+    "path_points": [
+      {"x": -0.02, "y": 0.05, "z": 0.0},
+      {"x": 0.0, "y": 0.05, "z": 0.0},
+      {"x": 0.02, "y": 0.05, "z": 0.0}
+    ],
+    "target_radius_mm": 8
+  },
+  "workflow": [
+    {"id": "prep", "label": "Vorbereitung", "instruction": "Setzen Sie Marker entlang des vorgegebenen Pfads."},
+    {"id": "follow", "label": "Pfad folgen", "instruction": "Untersuchen Sie das Modell und den Verlauf des Pfads."},
+    {"id": "finish", "label": "Abschluss", "instruction": "Exportieren Sie die Ergebnisse."}
+  ],
+  "evaluation": { "metrics": ["duration_s","avg_distance_mm","errors_count"] }
+}
