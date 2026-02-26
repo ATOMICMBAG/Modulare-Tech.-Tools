@@ -256,111 +256,111 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 - Projektstruktur:
   ~/webseite_de/
   main.py [[anpassen]: Haupt Landingpage, Menü zu allen Modulen, funktioniert schon ganz gut, weitere Module Erstellen und einbinden]
-  │
-  ├─ 1_3d_viewer/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ app.py
-  │ │
-  │ ├─ templates/
-  │ │ ├─ index.html
-  │ │ └─ viewer.html
-  │ ├─ static/
-  │ └─ uploads/
-  │
-  ├─ 2_data_analysis/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ app.py
-  │ │
-  │ ├─ templates/
-  │ │ ├─ index.html
-  │ │ └─ results.html
-  │ │
-  │ └─ static/
-  │ ├─ uploads/
-  │ └─ plots/
-  │
-  ├─ 3_sim_and_train/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ app.py
-  │ │
-  │ ├─ scenarios/
-  │ │ ├─ baseline_demo.json
-  │ │ ├─ liver_basic.json
-  │ │ └─ training_paths.json
-  │ │
-  │ ├─ static/
-  │ │ ├─ models/
-  │ │ │ └─ placeholder_model.glb
-  │ │ │
-  │ │ ├─ js/
-  │ │ │ ├─ sceneLoader.js
-  │ │ │ ├─ interaction.js
-  │ │ │ ├─ workflow.js
-  │ │ │ └─ metrics.js
-  │ │ │
-  │ │ └─ css/
-  │ │ └─ style.css
-  │ │
-  │ └─ templates/
-  │ ├─ index.html
-  │ ├─ simulator.html
-  │ └─ results.html
-  │  
-   ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
-  │ │
-  │ ├── main_app.py # (Optional) Haupt-Einstiegspunkt für alle Module
-  │ │
-  │ ├── 1_data_upload_and_analysis/ # [Modul 1: Datenanalyse & Upload]
-  │ │ ├─ app.py # Logik für Upload und statistische Auswertung
-  │ │ └─ ...
-  │ │
-  │ ├── 2_model_evaluation/ # [Modul 2: Modell-Evaluation]
-  │ │ ├─ app.py # Logik für Metriken und Modell-Vergleich
-  │ │ └─ ...
-  │ │
-  │ ├── 3_sim_and_train/ # [Modul 3: Simulation & Training]
-  │ │ ├─ app.py # Logik für 3D-Ladeszenarien und Metrik-Erfassung
-  │ │ ├─ scenarios/ # JSON-Konfigurationen für Simulationen
-  │ │ ├─ static/
-  │ │ │ └─ models/ # 3D-Modelle (.glb) für die Simulation
-  │ │ └─ ...
-  │ │
-  │ └── 4_audio_anno_chat/ # [Modul 4: Audio-Annotation & Kollaboration]
-  │ ├─ app.py # Flask Backend (Upload, Dateiverwaltung & KI-Trigger)
-  │ │
-  │ ├─ requirements.txt # Flask, Whisper (für KI)
-  │ │
-  │ ├─ static/ # Frontend-Assets
-  │ │ ├─ uploads/ # Gespeicherte Audio-Dateien (.webm/.wav)
-  │ │ ├─ css/
-  │ │ │ └─ style.css
-  │ │ ├─ js/
-  │ │ │ ├─ recorder.js # Hauptlogik: MediaRecorder, Sicherheit, Upload
-  │ │ │ └─ visualizer.js # WaveSurfer.js Initialisierung
-  │ │  
-   │ └─ templates/
-  │ └─ index.html # Die VoiceLog-GUI (Recorder & History)
-  │
-  ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ app.py
-  │ │
-  │ ├─ requirements.txt # Flask, openai-whisper, torch
-  │ │
-  │ ├─ static/ # Frontend-Assets (Audio-Uploads)
-  │ │
-  │ └─ templates/
-  │ └─ audio_anno_index.html # Audio-Recorder Interface
-  │
-  ├─ 5_ai/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ app.py # Blueprint für KI-IFrame
-  │ │
-  │ └─ templates/ # Referenziert ../templates/ai_index.html
-  │
-  ├─ 6_wiki_trends/ [[erledigt]: funktioniert ganz gut]
-  │ ├─ app.py # RSS-Feed Parser
-  │ │
-  │ └─ templates/ # Referenziert ../templates/wiki_index.html
-  │
+│
+├─ 1_3d_viewer/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ templates/
+│ │ ├─ index.html
+│ │ └─ viewer.html
+│ ├─ static/
+│ └─ uploads/
+│
+├─ 2_data_analysis/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ templates/
+│ │ ├─ index.html
+│ │ └─ results.html
+│ │
+│ └─ static/
+│ ├─ uploads/
+│ └─ plots/
+│
+├─ 3_sim_and_train/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ scenarios/
+│ │ ├─ baseline_demo.json
+│ │ ├─ liver_basic.json
+│ │ └─ training_paths.json
+│ │
+│ ├─ static/
+│ │ ├─ models/
+│ │ │ └─ placeholder_model.glb
+│ │ │
+│ │ ├─ js/
+│ │ │ ├─ sceneLoader.js
+│ │ │ ├─ interaction.js
+│ │ │ ├─ workflow.js
+│ │ │ └─ metrics.js
+│ │ │
+│ │ └─ css/
+│ │ └─ style.css
+│ │
+│ └─ templates/
+│ ├─ index.html
+│ ├─ simulator.html
+│ └─ results.html
+│  
+ ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
+│ │
+│ ├── main_app.py # (Optional) Haupt-Einstiegspunkt für alle Module
+│ │
+│ ├── 1_data_upload_and_analysis/ # [Modul 1: Datenanalyse & Upload]
+│ │ ├─ app.py # Logik für Upload und statistische Auswertung
+│ │ └─ ...
+│ │
+│ ├── 2_model_evaluation/ # [Modul 2: Modell-Evaluation]
+│ │ ├─ app.py # Logik für Metriken und Modell-Vergleich
+│ │ └─ ...
+│ │
+│ ├── 3_sim_and_train/ # [Modul 3: Simulation & Training]
+│ │ ├─ app.py # Logik für 3D-Ladeszenarien und Metrik-Erfassung
+│ │ ├─ scenarios/ # JSON-Konfigurationen für Simulationen
+│ │ ├─ static/
+│ │ │ └─ models/ # 3D-Modelle (.glb) für die Simulation
+│ │ └─ ...
+│ │
+│ └── 4_audio_anno_chat/ # [Modul 4: Audio-Annotation & Kollaboration]
+│ ├─ app.py # Flask Backend (Upload, Dateiverwaltung & KI-Trigger)
+│ │
+│ ├─ requirements.txt # Flask, Whisper (für KI)
+│ │
+│ ├─ static/ # Frontend-Assets
+│ │ ├─ uploads/ # Gespeicherte Audio-Dateien (.webm/.wav)
+│ │ ├─ css/
+│ │ │ └─ style.css
+│ │ ├─ js/
+│ │ │ ├─ recorder.js # Hauptlogik: MediaRecorder, Sicherheit, Upload
+│ │ │ └─ visualizer.js # WaveSurfer.js Initialisierung
+│ │  
+ │ └─ templates/
+│ └─ index.html # Die VoiceLog-GUI (Recorder & History)
+│
+├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ requirements.txt # Flask, openai-whisper, torch
+│ │
+│ ├─ static/ # Frontend-Assets (Audio-Uploads)
+│ │
+│ └─ templates/
+│ └─ audio_anno_index.html # Audio-Recorder Interface
+│
+├─ 5_ai/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py # Blueprint für KI-IFrame
+│ │
+│ └─ templates/ # Referenziert ../templates/ai_index.html
+│
+├─ 6_wiki_trends/ [[erledigt]: funktioniert ganz gut]
+│ ├─ app.py # RSS-Feed Parser
+│ │
+│ └─ templates/ # Referenziert ../templates/wiki_index.html
+│
   └─ 7_com/ [[erledigt]: funktioniert ganz gut]
-  ├─ app.py # IoT-API-Endpunkte
-  │
+├─ app.py # IoT-API-Endpunkte
+│
   └─ templates/ # Referenziert ../templates/com_index.html
 
 ---
@@ -381,3 +381,4 @@ README oder Installer im Projektordner mit Installations- und Erweiterungshinwei
 - Lokal - Flask-App starten: `bash    python3 app.py    `
 - Im Browser öffnen: `http://webseite.de:5000`
 - Dateien einfach mit FileZilla zwischen Windows und VPS austauschen.
+
