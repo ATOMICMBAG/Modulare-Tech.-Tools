@@ -1,28 +1,6 @@
-# maazi.de:5000 - Modulare Technische Tools
+# Modulare Technische Tools
 
 Dieses Projekt ist eine Sammlung modularer webbasierter Tools für den Bereich "Chirurgische Technologische Innovationen" am Klinikum. Es dient als Bewerbungsprojekt für die Informatiker-Stelle und demonstriert vielseitige Fähigkeiten im Bereich Web-Entwicklung, 3D-Visualisierung, Datenanalyse und mehr.
-
-### VENV ! install ! Virtual Envirement
-
-```bash
-python3 -m venv venv
-
-```
-
-DWenn du bereits ein venv hast in `~/maazi_de/venv` , aktiviere es und installiere darin:
-
-```bash
-cd ~/maazi_de
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-Nach der Installation starte die App mit:
-
-```bash
-source venv/bin/activate
-python app.py
-```
 
 ###
 
@@ -41,16 +19,7 @@ Dokumentation: Kurze Anleitung, wie neue Module hinzugefügt werden können
 
 ---
 
-## Plan
-
-## Modulares Web-Tool für chirurgische Innovationen
-
-Meine ToDo-Label info (Marker)!:
-[offen] = ist noch zu erledigen
-[offen/low-pio] = kann erledigt werden
-[anpassen] = ist noch anzupassen
-[erledigt] = ist erledigt
-[erledigt] = funktioniert schon ganz gut
+## Moduls
 
 1. 3D-Viewer für medizinische Bilddaten (1_3d_viewer) [[erledigt]: funktioniert schon ganz gut]
 
@@ -367,20 +336,30 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 
 ---
 
-## Dokumentation ## [[anpassen]: nach jedem update]
+### VENV ! install ! Virtual Envirement
 
-README oder Installer im Projektordner mit Installations- und Erweiterungshinweisen (wie z.B richtige Three version für VPS Ubuntu).
+```bash
+python3 -m venv venv
+
+```
+
+DWenn du bereits ein venv hast in `~/maazi_de/venv` , aktiviere es und installiere darin:
+
+```bash
+cd ~/maazi_de
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Nach der Installation starte die App mit:
+
+```bash
+source venv/bin/activate
+python app.py
+```
 
 ---
 
----
-
-### erinnerung
-
-- Auf VPS - Flask-App starten: `bash    python3 app.py    `
-- Lokal - Flask-App starten: `bash    python3 app.py    `
-- Im Browser öffnen: `http://webseite.de:5000`
-- Dateien einfach mit FileZilla zwischen Windows und VPS austauschen.
 
 
 
