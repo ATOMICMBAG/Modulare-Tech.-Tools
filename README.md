@@ -341,7 +341,7 @@ python3 -m venv venv
 
 ```
 
-DWenn du bereits ein venv hast in `~/maazi_de/venv` , aktiviere es und installiere darin:
+Wenn du bereits ein venv hast in `~/maazi_de/venv` , aktiviere es und installiere darin:
 
 ```bash
 cd ~/maazi_de
@@ -357,6 +357,7 @@ python app.py
 ```
 
 ---
+
 
 
 
