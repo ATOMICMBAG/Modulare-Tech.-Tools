@@ -6,8 +6,6 @@ Dieses Projekt ist eine Sammlung modularer webbasierter Tools für den Bereich "
 
 ## Projektstruktur
 
-Ein modulares, webbasiertes Tool, das auf deinem VPS o. ä. (Ubuntu + Plesk) läuft und als Demo auf webseite.de:5000 erreichbar ist. Das Tool soll verschiedene Module (Plug-ins) aufnehmen können, die jeweils eine Funktion aus dem Bereich „Chirurgische Technologische Innovationen“ abbilden. Die Module können leicht erweitert oder angepasst werden.
-
 Technische Umsetzung
 Backend: Python (z. B. Flask, FastAPI) oder Node.js, modular aufgebaut
 Frontend: Web-GUI mit React, Vue.js oder einfachem HTML/JS, Fokus auf Erweiterbarkeit
@@ -359,6 +357,7 @@ python app.py
 ```
 
 ---
+
 
 
 
