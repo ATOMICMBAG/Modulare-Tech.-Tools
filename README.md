@@ -214,7 +214,7 @@ Automatische Aktualisierung bei Laden zur Demonstration von Trend-Monitoring.
 Features: Erlaubt Erweiterung um Favoriten/Bookmarks (zukünftig), Tags basierend auf Quelle.
 Integration: Erreichbar unter `/wiki/`, für Üblem als Ressource für neue Technologien und Trends im Bereich Chirurgische Innovationen.
 
-![Demo Screenshot](static/pic/6_Iot.jpeg)
+![Demo Screenshot](static/pic/7_Iot.jpeg)
 
 ---
 
@@ -244,7 +244,7 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 - REST-API für Geräte-Status und steuerung.
 - Erweiterbar für MQTT für Real-time Events, als Demo für Forschungs- und Geräte-Kollektion-Integration.
 
-![Demo Screenshot](static/pic/7_rss.jpeg)
+![Demo Screenshot](static/pic/6_rss.jpeg)
 
 ---
 
@@ -381,4 +381,5 @@ README oder Installer im Projektordner mit Installations- und Erweiterungshinwei
 - Lokal - Flask-App starten: `bash    python3 app.py    `
 - Im Browser öffnen: `http://webseite.de:5000`
 - Dateien einfach mit FileZilla zwischen Windows und VPS austauschen.
+
 
