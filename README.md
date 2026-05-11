@@ -1,6 +1,6 @@
 # Modulare Technische Tools
 
-Dieses Projekt ist eine Sammlung modularer webbasierter Tools für den Bereich "Chirurgische Technologische Innovationen" am Klinikum. Es dient als Bewerbungsprojekt für Informatiker-Stelle und demonstriert vielseitige Fähigkeiten im Bereich Web-Entwicklung, 3D-Visualisierung, Datenanalyse und mehr.
+Dieses Projekt ist eine Sammlung modularer webbasierter Tools für den Bereich "Chirurgische Technologische Innovationen" am Klinikum. Es dient als Bewerbungsprojekt und demonstriert vielseitige Fähigkeiten im Bereich Web-Entwicklung, 3D-Visualisierung, Datenanalyse und mehr.
 
 ###
 
