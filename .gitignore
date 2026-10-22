@@ -1,0 +1,43 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Geheimnisse / lokale Konfiguration
+.env
+.env.*
+!.env.example
+
+# Laufzeitdaten (Uploads, erzeugte Plots, Logs, Aufnahmen)
+*/static/uploads/*
+static/uploads/*
+!*/static/uploads/.gitkeep
+!static/uploads/.gitkeep
+*/static/plots/*
+static/plots/*
+!*/static/plots/.gitkeep
+!static/plots/.gitkeep
+3_sim_and_train/logs/*
+!3_sim_and_train/logs/.gitkeep
+*.webm
+*.wav
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Portfolio-Hauptseite maazi.de (gehört nicht zum Toolkit, liegt nur auf dem Server)
+templates/maazi_de/
+static/screen/
+static/legal/
+static/index_*.html
+static/ai/
+static/css/legal.css
+static/css/ratgeber.css
+
+# Alte / Vorlagen-READMEs
+README_old.md
+README_Template_*.md

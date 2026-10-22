@@ -1,9 +1,10 @@
+import os
 from flask import Blueprint, render_template, request, jsonify
 import requests
 import threading
 import time
 
-com_bp = Blueprint('com', __name__, template_folder='../templates')
+com_bp = Blueprint('com', __name__, template_folder='../templates', root_path=os.path.dirname(os.path.abspath(__file__)))
 
 devices = [{'name': 'Duet3D 3D Printer', 'url': 'http://192.168.1.100', 'type': '3D Printer'}, {'name': 'Medical Sensor Hub', 'url': 'http://192.168.1.200', 'type': 'Sensor'}]
 

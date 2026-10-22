@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
 import pandas as pd
 import os
 import matplotlib
@@ -26,7 +27,7 @@ def analyze():
     if file.filename == '':
         return redirect(request.url)
     if file and file.filename.endswith('.csv'):
-        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        filepath = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
         file.save(filepath)
 
         # Read CSV

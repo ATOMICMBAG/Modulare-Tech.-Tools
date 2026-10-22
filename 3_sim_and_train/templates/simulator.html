@@ -1,0 +1,394 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>maazi.de LMU - Simulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgba(51, 51, 51, 0.9);
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      text-align: center;
+      padding: 20px 20px;
+      background: rgba(51, 51, 51, 0.9);
+      border-bottom: 2px solid #666;
+      color: #fff;
+      height: auto;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .container {
+      width: 99vw;
+      height: 99vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: background 0.3s;
+      font-weight: bold;
+    }
+
+    footer {
+      bottom: 0px;
+      left: 0;
+      right: 0;
+      position: fixed;
+      text-align: center;
+      padding: 20px;
+      background: rgba(51, 51, 51, 0.9);
+      border-top: 2px solid #666;
+      color: #fff;
+      z-index: 1000;
+    }
+
+    #ui {
+      background: #f3f3f3;
+      padding: 10px;
+      border-bottom: 1px solid #ccc
+    }
+
+    /* Fullscreen viewer similar to 1_3d_viewer */
+    #viewer {
+      background: #111;
+      width: 99vw;
+      height: 99vh;
+    }
+
+    #viewer canvas {
+      width: 99%;
+      height: 99%;
+      display: block
+    }
+
+    /* Floating panels */
+    .panel {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+      background: rgba(51, 51, 51, 0.9);
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #666;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      width: 300px;
+      height: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .panel2 {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1001;
+      background: rgba(51, 51, 51, 0.9);
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #666;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      width: 380px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .panel section,
+    .panel2 section {
+      margin-bottom: 12px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 8px;
+    }
+
+    .panel section:last-child,
+    .panel2 section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    button {
+      margin-right: 8px
+    }
+
+    #info-panel {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+  </style>
+  <link rel="stylesheet" href="/sim_train/static/css/style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Simulations- & Trainings-Modul</h1>
+    <p>Interaktive Trainingsszenarien — Modul der maazi.de LMU-Tools</p>
+  </header>
+
+  <div class="container">
+    <!-- Left floating panel: controls -->
+    <div class="panel2">
+      <section>
+        <h3>Anzeige & Einstellungen</h3>
+        <label style="display:block;margin-bottom:6px;"><input type="checkbox" id="chk-grid-horizontal" checked
+            data-tooltip="Schaltet die horizontale Grid-Anzeige ein/aus" /> Zeige Grid horizontal</label>
+        <label style="display:block;margin-bottom:6px;"><input type="checkbox" id="chk-grid-vertical" checked
+            data-tooltip="Schaltet die vertikale Grid-Anzeige ein/aus" /> Zeige Grid vertikal</label>
+        <label style="display:block;margin-bottom:6px;"><input type="checkbox" id="chk-snap"
+            data-tooltip="Aktiviert das Snappen auf die nächstgelegenen Vertices" /> Snap to Vertex</label>
+        <label style="display:block;margin-bottom:6px;">Snap Threshold (m): <input type="range" id="snap-threshold"
+            min="0.001" max="0.2" step="0.001" value="0.005" style="margin-left:8px; width:140px"
+            data-tooltip="Entfernung, innerhalb derer ein Vertex als Ziel gerastet wird (m)" /> <span id="snap-value"
+            style="margin-left:8px; font-weight:600;">5 mm</span></label>
+        <div style="display:flex;gap:8px;margin-top:6px">
+          <div style="margin-top:8px">Einheiten:</div>
+          <button id="unit-mm" class="unit-btn" aria-pressed="false">mm</button>
+          <button id="unit-cm" class="unit-btn" aria-pressed="false">cm</button>
+          <button id="unit-m" class="unit-btn" aria-pressed="true">m</button>
+        </div>
+      </section>
+      <section>
+        <h3>Visuals & Licht</h3>
+        <label style="display:block;margin-bottom:6px;">Hintergrundfarbe: <input type="color" id="col-bg"
+            value="#111111" style="margin-left:8px" /></label>
+        <label style="display:block;margin-bottom:6px;">Grid Hauptfarbe: <input type="color" id="col-grid-major"
+            value="#333333" style="margin-left:8px" /></label>
+        <label style="display:block;margin-bottom:6px;">Grid Nebenfarbe: <input type="color" id="col-grid-minor"
+            value="#222222" style="margin-left:8px" /></label>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+          <label>Grid-Spacing (m):<input type="range" id="grid-spacing" min="0.01" max="50" step="0.01" value="1"
+              style="flex:1;margin-left:8px"
+              data-tooltip="Abstand zwischen Grid-Linien (Meter); größere Werte reduzieren die Teilungen" /> <span
+              id="grid-spacing-value" style="margin-left:8px; font-weight:600;">1.00 m</span></label>
+          <div style="display:flex;gap:6px;margin-left:8px">
+            <select id="grid-preset" title="Grid Preset"
+              data-tooltip="Standard-Abstände für die Grid-Spacing-Einstellung wählen">
+              <option value="0.1">Fein (0.1 m)</option>
+              <option value="1" selected>Mittel (1 m)</option>
+              <option value="10">Grob (10 m)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+          <label>Lichtstärke: <input type="range" id="light-intensity" min="0" max="2" step="0.01" value="1"
+              style="margin-left:8px" data-tooltip="Helligkeit der gerichteten Lichtquelle (intensity)" /> <span
+              id="light-intensity-value" style="margin-left:8px; font-weight:600;">1.00</span></label>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+          <label>Azimut: <input type="range" id="light-azimuth" min="0" max="360" value="45"
+              data-tooltip="Azimut-Winkel der Lichtquelle (Grad, horizontal)" /> <span id="light-az-value"
+              style="margin-left:8px; font-weight:600;">45°</span></label>
+          <label>Elevation: <input type="range" id="light-elevation" min="-90" max="90" value="30"
+              data-tooltip="Elevation-Winkel der Lichtquelle (Grad, vertikal)" /> <span id="light-el-value"
+              style="margin-left:8px; font-weight:600;">30°</span></label>
+        </div>
+      </section>
+      <section>
+        <label style="display:block;margin-bottom:6px;">Markerfarbe: <input type="color" id="col-marker" value="#00ff00"
+            style="margin-left:8px" /></label>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+          <label>Marker-Skalierung: <input type="range" id="marker-scale" min="0.1" max="5" step="0.1" value="1"
+              data-tooltip="Skaliert die Sichtgröße der Marker (+/-)" /> <span id="marker-scale-value"
+              style="margin-left:8px; font-weight:600;">1.0x</span></label>
+        </div>
+        <label style="display:block;margin-top:8px;"><input type="checkbox" id="chk-marker-occlusion"
+            data-tooltip="Wenn aktiviert, werden Marker wie normale Objekte vom Modell verdeckt (DepthTest)" /> Marker
+          Occlusion (DepthTest)</label>
+      </section>
+      <section>
+        <details>
+          <summary>Kurze Hilfe zu Sichtbarkeit und Performance</summary>
+          <ul style="margin:6px 0 0 18px;padding:0;color:#ddd;">
+            <li>Grid-Spacing reduziert Anzahl der Grid-Teilungen; bei großen Modellen auf grob stellen.</li>
+            <li>Marker Occlusion = realistische Verdeckung durch das Modell. Standardmäßig deaktiviert, damit Marker
+              sichtbar bleiben.</li>
+            <li>Snap Threshold passt an, wie nahe ein Vertex sein muss, um gerastet zu werden.</li>
+          </ul>
+        </details>
+      </section>
+
+      <section>
+        <h4>
+          <div id="status" style="font-weight:600">Bereit</div>
+        </h4>
+      </section>
+    </div>
+
+    <!-- Right floating panel: instructions / results -->
+    <div class="panel">
+      <section>
+        <h3>Simulations- & Trainingsumgebung</h3>
+        <p style="margin:0 0 8px 0;">Dieses Modul dient demonstrativen Trainingsszenarien. Navigation und Interaktion:</p>
+        <p>Maus L klick — Marker setzen</p>
+        <p>Maus L ziehen — Drehen</p>
+        <p>Mausrad — Zoomen</p>
+        <p>Maus R — Greifen</p>
+        <div id="instructions" style="padding:8px; font-weight:600">Anleitung: Klicken Sie auf ‚Start‘ und führen Sie
+          die Anweisungen aus.</div>
+      </section>
+      <section>
+        <h3>Placeholder Modell</h3>
+        <button id="btn-start">Anzeigen</button>
+      </section>
+      <section>
+        <h3>Modell Laden</h3>
+        <input type="file" id="file-input" accept=".glb,.gltf,.obj,.stl" style="display:block;margin-bottom:8px;" />
+        <button id="btn-load-model">Datei Anzeigen</button>
+      </section>
+      <section>
+        <h3>Marker Ergebnisse</h3>
+        <div id="result-panel"
+          style="background:#fff;padding:8px;border-radius:6px;display:none;white-space:pre-wrap;color:#000;max-height:100px;overflow:auto;">
+          Ergebnisse werden hier angezeigt.</div>
+        <div style="margin-top:8px"><button id="btn-clear-markers">Marker löschen</button></div>
+      </section>
+      <section>
+        <h3>Export Ergebnisse</h3>
+        <button id="btn-export">Export CSV</button>
+        <button id="btn-export-json">Export JSON</button>
+      </section>
+      <section>
+        <button onclick="window.location.href='/hp'">Zurück zur Hauptseite</button>
+      </section>
+    </div>
+
+    <div id="viewer"></div>
+    <div id="tooltip"
+      style="position:fixed;display:none;z-index:9999;padding:6px 8px;background:rgba(0,0,0,0.85);color:#fff;border-radius:6px;font-size:13px;pointer-events:none;max-width:320px;box-shadow:0 4px 8px rgba(0,0,0,0.4);">
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 https://maazi.de/toolkit - LMU Klinikum - Chirurgische Technologische Innovationen</p>
+  </footer>
+
+  <script src="/sim_train/static/js/three-waiter.js"></script>
+  <script src="/sim_train/static/js/canvas-fallback.js"></script>
+  <script>
+    (async function () {
+      // Prefer local module build under /static/libs if available — this will inject an importmap
+      async function loadLocalModule() {
+        try { const r = await fetch('/sim_train/static/libs/three.module.js', { method: 'HEAD' }); return r.ok; } catch (e) { return false; }
+      }
+      if (await loadLocalModule()) {
+        const map = document.createElement('script');
+        map.type = 'importmap';
+        map.textContent = JSON.stringify({ imports: { 'three': '/sim_train/static/libs/three.module.js' } });
+        document.head.appendChild(map);
+        // now create a module loader that sets window.THREE and helpers
+        const s = document.createElement('script');
+        s.type = 'module';
+        s.textContent = `
+          import * as THREE from '/sim_train/static/libs/three.module.js';
+          import { OrbitControls } from '/sim_train/static/libs/examples/jsm/controls/OrbitControls.js';
+          import { GLTFLoader } from '/sim_train/static/libs/examples/jsm/loaders/GLTFLoader.js';
+          import { OBJLoader } from '/sim_train/static/libs/examples/jsm/loaders/OBJLoader.js';
+          import { STLLoader } from '/sim_train/static/libs/examples/jsm/loaders/STLLoader.js';
+          window.THREE = THREE; window.THREE.OrbitControls = OrbitControls; window.THREE.GLTFLoader = GLTFLoader; window.THREE.OBJLoader = OBJLoader; window.THREE.STLLoader = STLLoader;
+        `;
+        document.head.appendChild(s);
+        console.log('[simulator] Using local Three.js modules');
+        document.getElementById('status') && (document.getElementById('status').innerText = 'Using local Three.js modules');
+      } else {
+        // fallback to CDN module import
+        const s = document.createElement('script');
+        s.type = 'module';
+        s.textContent = `
+          import * as THREE from 'https://cdn.skypack.dev/three@0.154.0';
+          import { OrbitControls } from 'https://cdn.skypack.dev/three@0.154.0/examples/jsm/controls/OrbitControls.js';
+          import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.154.0/examples/jsm/loaders/GLTFLoader.js';
+          import { OBJLoader } from 'https://cdn.skypack.dev/three@0.154.0/examples/jsm/loaders/OBJLoader.js';
+          import { STLLoader } from 'https://cdn.skypack.dev/three@0.154.0/examples/jsm/loaders/STLLoader.js';
+          window.THREE = THREE; window.THREE.OrbitControls = OrbitControls; window.THREE.GLTFLoader = GLTFLoader; window.THREE.OBJLoader = OBJLoader; window.THREE.STLLoader = STLLoader;
+        `;
+        document.head.appendChild(s);
+        console.log('[simulator] Using CDN Three.js modules (skypack)');
+        document.getElementById('status') && (document.getElementById('status').innerText = 'Using CDN Three.js modules');
+      }
+    })();
+  </script>
+  <script type="module" src="/sim_train/static/js/three-local-loader.js"></script>
+  <script>
+    // quick check and user hint for Tracking Prevention blocking modules
+    setTimeout(() => {
+      if (typeof window.THREE === 'undefined') {
+        const info = document.getElementById('status');
+        if (info) info.innerText = 'Fehler: DreiJS Module konnten nicht geladen werden. Bitte Tracking Prevention deaktivieren oder anderen Browser verwenden.';
+      }
+    }, 1000);
+  </script>
+  <script>
+    // UMD fallback loader: in case module imports are blocked
+    (function () {
+      function injectScript(src, onload) { const s = document.createElement('script'); s.src = src; s.onload = onload; s.onerror = function () { console.error('Failed to load', src); }; document.head.appendChild(s); }
+      async function localExists(path) { try { const r = await fetch(path, { method: 'HEAD' }); return r.ok; } catch (e) { return false; } }
+      setTimeout(async () => {
+        if (typeof window.THREE === 'undefined') {
+          console.warn('THREE undefined, loading UMD fallback');
+          const localThree = await localExists('/sim_train/static/libs/three.min.js');
+          const base = localThree ? '/sim_train/static/libs' : 'https://unpkg.com/three@0.154.0';
+          injectScript(base + '/build/three.min.js', () => {
+            // attach UMD loaders
+            injectScript(base + '/examples/js/controls/OrbitControls.js');
+            injectScript(base + '/examples/js/loaders/GLTFLoader.js');
+            injectScript(base + '/examples/js/loaders/OBJLoader.js');
+            injectScript(base + '/examples/js/loaders/STLLoader.js');
+            const info = document.getElementById('status'); if (info) info.innerText = 'THREE loaded (UMD fallback)';
+          });
+        }
+      }, 1200);
+    })();
+  </script>
+
+  <script> const SCENARIO_ID = "{{ scenario_id }}"; </script>
+  <script src="/sim_train/static/js/sceneLoader.js"></script>
+  <script src="/sim_train/static/js/interaction.js"></script>
+  <script src="/sim_train/static/js/workflow.js"></script>
+  <script src="/sim_train/static/js/metrics.js"></script>
+</body>
+
+</html>

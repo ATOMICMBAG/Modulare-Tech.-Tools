@@ -24,7 +24,7 @@ if whisper:
     except Exception as e:
         print(f"FEHLER beim Laden des Whisper Modells: {e}. Pruefe torch und ffmpeg Installation.")
 
-audio_anno_bp = Blueprint('audio_anno', __name__, template_folder='templates', static_folder='static')
+audio_anno_bp = Blueprint('audio_anno', __name__, template_folder='templates', static_folder='static', root_path=os.path.dirname(os.path.abspath(__file__)))
 
 # Konfiguration
 UPLOAD_FOLDER = os.path.join(audio_anno_bp.root_path, 'static/uploads')

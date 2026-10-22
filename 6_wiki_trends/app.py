@@ -1,9 +1,10 @@
+import os
 from flask import Blueprint, render_template, request, jsonify
 import feedparser
 import requests
 from datetime import datetime
 
-wiki_bp = Blueprint('wiki_trends', __name__, template_folder='../templates')
+wiki_bp = Blueprint('wiki_trends', __name__, template_folder='../templates', root_path=os.path.dirname(os.path.abspath(__file__)))
 
 @wiki_bp.route('/')
 def index():
