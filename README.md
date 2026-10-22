@@ -374,7 +374,7 @@ Schnittstellen zu externen Geräten
 2. Skizze: Modull Integration in KIS-Moduls
 
 <p align="center">
-  <a href="static/KIS.svg"><img src="static/KIS.png" width="100%" height="100%"></a>
+  <a href="static/KIS.svg"><img src="static/KIS.png" width="80%" height="80%"></a>
 </p>
 
 Modulare Plattform, die verschiedene medizinische Funktionen abbildet. Schnittstellen: APIs (REST/SOAP), HL7/FHIR und ISiK sorgen für den Datenaustausch mit externen Systemen (Labor, Radiologie, Geräte).
