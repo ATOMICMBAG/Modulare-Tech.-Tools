@@ -151,7 +151,7 @@ Download-Link für Ergebnisse.
 
 Funktion / Ordner und Dateistruktur:
 Flask-App (Backend):
-**app.py** Blueprint für KI-Modul, rendert IFrame zu externer Open-WebUI (maazi.de:3000).
+**app.py** Blueprint für KI-Modul, rendert IFrame zu externer Open-WebUI (project.de:3000).
 Templates liegen in `../templates/`.
 
 Frontend (HTML):
@@ -342,10 +342,10 @@ python3 -m venv venv
 
 ```
 
-Wenn du bereits ein venv hast in `~/maazi_de/venv` , aktiviere es und installiere darin:
+Wenn du bereits ein venv hast in `~/project_de/venv` , aktiviere es und installiere darin:
 
 ```bash
-cd ~/maazi_de
+cd ~/project_de
 source venv/bin/activate
 pip install -r requirements.txt
 ```
