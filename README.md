@@ -359,8 +359,22 @@ python app.py
 
 ---
 
+Darlegung der Modularen Technischen Tools im Web-Toolkit
+1. Module als KIS-Basis:
 
+Diese Module sind modular, webbasiert und laufen auf deinem eigenen Server (z. B. maazi.de/hp). Sie bilden bereits viele typische KIS-Funktionen ab und sind technisch offen für Erweiterungen und Schnittstellen.
 
+3D-Viewer Modelle
+Datenanalyse und Statistikmodul
+3D-Simulation und Trainingsszenarien
+Audio Annotation mit KI gestützte Analyse
+KI-Chatfunktionen und Analyse
+RSS-Feeds der medizinischen Technologie und Forschung
+Schnittstellen zu externen Geräten
+2. Skizze: Modull Integration in KIS-Moduls
 
+![Skizze](static/uploads/KIS.svg)
 
-
+Modulare Plattform, die verschiedene medizinische Funktionen abbildet. Schnittstellen: APIs (REST/SOAP), HL7/FHIR und ISiK sorgen für den Datenaustausch mit externen Systemen (Labor, Radiologie, Geräte).
+Module: Die entwickelten Plug-ins sind typische KIS-Komponenten. Kommunikationsarten: Schnittstellen können uni- oder bidirektional Daten übertragen.
+Ziele: Interoperabilität (Kompatibilität mit anderen Systemen), Datensicherheit (TLS, OAuth, DSGVO), Automatisierung (weniger manuelle Arbeit).
