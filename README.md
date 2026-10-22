@@ -223,7 +223,8 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 - Projektstruktur:
   ~/webseite_de/
   main.py [[anpassen]: Haupt Landingpage, Menü zu allen Modulen, funktioniert schon ganz gut, weitere Module Erstellen und einbinden]
-│
+```  
+project
 ├─ 1_3d_viewer/ [[erledigt]: funktioniert schon ganz gut]
 │ ├─ app.py
 │ │
@@ -270,7 +271,7 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 │ ├─ simulator.html
 │ └─ results.html
 │  
- ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
+├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
 │ │
 │ ├── main_app.py # (Optional) Haupt-Einstiegspunkt für alle Module
 │ │
@@ -302,7 +303,7 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 │ │ │ ├─ recorder.js # Hauptlogik: MediaRecorder, Sicherheit, Upload
 │ │ │ └─ visualizer.js # WaveSurfer.js Initialisierung
 │ │  
- │ └─ templates/
+│ └─ templates/
 │ └─ index.html # Die VoiceLog-GUI (Recorder & History)
 │
 ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
@@ -325,11 +326,11 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 │ │
 │ └─ templates/ # Referenziert ../templates/wiki_index.html
 │
-  └─ 7_com/ [[erledigt]: funktioniert ganz gut]
+├─ 7_com/ [[erledigt]: funktioniert ganz gut]
 ├─ app.py # IoT-API-Endpunkte
 │
-  └─ templates/ # Referenziert ../templates/com_index.html
-
+└─ templates/ # Referenziert ../templates/com_index.html
+```
 ---
 
 ---
