@@ -335,7 +335,7 @@ project
 
 ---
 
-### VENV ! install ! Virtual Envirement
+### VENV ! install ! Virtual Environment
 
 ```bash
 python3 -m venv venv
