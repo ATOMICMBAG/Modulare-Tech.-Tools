@@ -13,6 +13,9 @@ app.secret_key = os.environ.get('SECRET_KEY') or secrets.token_hex(32)
 if not os.environ.get('SECRET_KEY'):
     print("WARNUNG: SECRET_KEY nicht gesetzt - verwende zufälligen Key für diesen Start.")
 
+# Templates bei jeder Anfrage neu einlesen: Änderungen per Upload sind nach einem Reload sichtbar, ohne Neustart.
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 # Upload-Limit (Gesamtgröße pro Request), per MAX_UPLOAD_MB anpassbar. Standard: 200 MB (DICOM/STL).
 app.config['MAX_CONTENT_LENGTH'] = int(os.environ.get('MAX_UPLOAD_MB', '200')) * 1024 * 1024
 
@@ -34,7 +37,7 @@ def home():
     return redirect(url_for('toolkit'))
 
 # Toolkit Haupttseite Route
-@app.route('/toolkit')
+@app.route('/toolkit', strict_slashes=False)
 def toolkit():
     return render_template('index.html')
 
