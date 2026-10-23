@@ -335,7 +335,7 @@ project
 
 ---
 
-### VENV ! install ! Virtual Envirement
+### VENV ! install ! Virtual Environment
 
 ```bash
 python3 -m venv venv
@@ -362,7 +362,7 @@ python app.py
 Darlegung der Modularen Technischen Tools im Web-Toolkit
 
 1. Module als KIS-Basis:
-Diese Module sind modular, webbasiert und laufen auf deinem eigenen Server (z. B. maazi.de/hp). Sie bilden bereits viele typische KIS-Funktionen ab und sind technisch offen für Erweiterungen und Schnittstellen.
+Diese Module sind modular, webbasiert und laufen auf deinem eigenen Server (z. B. [maazi.de/toolkit](https://maazi.de/toolkit)). Sie bilden bereits viele typische KIS-Funktionen ab und sind technisch offen für Erweiterungen und Schnittstellen.
 
 3D-Viewer Modelle
 Datenanalyse und Statistikmodul

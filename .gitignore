@@ -37,6 +37,7 @@ static/index_*.html
 static/ai/
 static/css/legal.css
 static/css/ratgeber.css
+templates/main.html
 
 # Alte / Vorlagen-READMEs
 README_Template_*.md
