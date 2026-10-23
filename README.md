@@ -1,34 +1,10 @@
-# maazi.de:5000 - Modulare Technische Tools
+# Modulare Technische Tools
 
-Dieses Projekt ist eine Sammlung modularer webbasierter Tools für den Bereich "Chirurgische Technologische Innovationen" am Klinikum. Es dient als Bewerbungsprojekt für die Informatiker-Stelle und demonstriert vielseitige Fähigkeiten im Bereich Web-Entwicklung, 3D-Visualisierung, Datenanalyse und mehr.
-
-### VENV ! install ! Virtual Envirement
-
-```bash
-python3 -m venv venv
-
-```
-
-Wenn du bereits ein venv hast in `~/project/venv` , aktiviere es und installiere darin:
-
-```bash
-cd ~/project
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-Nach der Installation starte die App mit:
-
-```bash
-source venv/bin/activate
-python main.py
-```
+Dieses Projekt ist eine Sammlung modularer webbasierter Tools für den Bereich "Chirurgische Technologische Innovationen" am Klinikum. Es dient als Bewerbungsprojekt und demonstriert vielseitige Fähigkeiten im Bereich Web-Entwicklung, 3D-Visualisierung, Datenanalyse und mehr.
 
 ###
 
 ## Projektstruktur
-
-Ein modulares, webbasiertes Tool, das auf deinem VPS o. ä. (Ubuntu + Plesk) läuft und als Demo auf webseite.de:5000 erreichbar ist. Das Tool soll verschiedene Module (Plug-ins) aufnehmen können, die jeweils eine Funktion aus dem Bereich „Chirurgische Technologische Innovationen“ abbilden. Die Module können leicht erweitert oder angepasst werden.
 
 Technische Umsetzung
 Backend: Python (z. B. Flask, FastAPI) oder Node.js, modular aufgebaut
@@ -41,16 +17,7 @@ Dokumentation: Kurze Anleitung, wie neue Module hinzugefügt werden können
 
 ---
 
-## Plan
-
-## Modulares Web-Tool für chirurgische Innovationen
-
-Meine ToDo-Label info (Marker)!:
-[offen] = ist noch zu erledigen
-[offen/low-pio] = kann erledigt werden
-[anpassen] = ist noch anzupassen
-[erledigt] = ist erledigt
-[erledigt] = funktioniert schon ganz gut
+## Moduls
 
 1. 3D-Viewer für medizinische Bilddaten (1_3d_viewer) [[erledigt]: funktioniert schon ganz gut]
 
@@ -66,7 +33,7 @@ Meine ToDo-Label info (Marker)!:
 
 Funktion / Ordner und Dateistruktur:
 Flask-App (Backend):
-**main.py** ermöglicht Datei-Upload (STL/OBJ) und zeigt das Modell im Viewer an.
+**app.py** ermöglicht Datei-Upload (STL/OBJ) und zeigt das Modell im Viewer an.
 Templates liegen im Ordner `templates/`.
 Statische Dateien (Modelle) liegen in `static/uploads/`.
 
@@ -87,7 +54,7 @@ STL und OBJ Modell wird nach Upload korrekt angezeigt.
 
 Funktion / Ordner und Dateistruktur:
 Backend (Flask, Python):
-**main.py** Datei-Upload für Messdaten (CSV, XLSX)
+**app.py** Datei-Upload für Messdaten (CSV, XLSX)
 Daten einlesen und analysieren (z. B. mit Pandas, NumPy)
 Statistische Kennzahlen berechnen (Mittelwert, Standardabweichung)
 Visualisierung erzeugen (Histogramm, Boxplot, ggf. mit Matplotlib/Plotly)
@@ -184,7 +151,7 @@ Download-Link für Ergebnisse.
 
 Funktion / Ordner und Dateistruktur:
 Flask-App (Backend):
-**main.py** Blueprint für KI-Modul, rendert IFrame zu externer Open-WebUI (maazi.de:3000).
+**app.py** Blueprint für KI-Modul, rendert IFrame zu externer Open-WebUI (project.de:3000).
 Templates liegen in `../templates/`.
 
 Frontend (HTML):
@@ -203,7 +170,7 @@ Integration: Erreichbar unter `/ai/`, zeigt direkt die KI-Interface für Test un
 
 Funktion / Ordner und Dateistruktur:
 Flask-App (Backend):
-**main.py** Blueprint, fetcht Artikel aus RSS-Feeds (Google News Medical, NCBI PubMed).
+**app.py** Blueprint, fetcht Artikel aus RSS-Feeds (Google News Medical, NCBI PubMed).
 Verwendet feedparser für sichere RSS-Parsing.
 Templates liegen in `../templates/`.
 
@@ -214,7 +181,7 @@ Automatische Aktualisierung bei Laden zur Demonstration von Trend-Monitoring.
 Features: Erlaubt Erweiterung um Favoriten/Bookmarks (zukünftig), Tags basierend auf Quelle.
 Integration: Erreichbar unter `/wiki/`, für Üblem als Ressource für neue Technologien und Trends im Bereich Chirurgische Innovationen.
 
-![Demo Screenshot](static/pic/6_Iot.jpeg)
+![Demo Screenshot](static/pic/7_rss.jpeg)
 
 ---
 
@@ -229,7 +196,7 @@ Integration: Erreichbar unter `/wiki/`, für Üblem als Ressource für neue Tech
 
 Funktion / Ordner und Dateistruktur:
 Flask-App (Backend):
-**main.py** Blueprint mit Devices-Liste, Status-API-Endpunkte für HTTP requests zu Geräten.
+**app.py** Blueprint mit Devices-Liste, Status-API-Endpunkte für HTTP requests zu Geräten.
 Templates liegen in `../templates/`.
 AI-Predict Route für simulierten KI-Wartungsempfehlungen (z. B. für Sensoren).
 
@@ -244,7 +211,7 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 - REST-API für Geräte-Status und steuerung.
 - Erweiterbar für MQTT für Real-time Events, als Demo für Forschungs- und Geräte-Kollektion-Integration.
 
-![Demo Screenshot](static/pic/7_rss.jpeg)
+![Demo Screenshot](static/pic/6_Iot.jpeg)
 
 ---
 
@@ -256,133 +223,161 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 - Projektstruktur:
   ~/webseite_de/
   main.py [[anpassen]: Haupt Landingpage, Menü zu allen Modulen, funktioniert schon ganz gut, weitere Module Erstellen und einbinden]
-  ```
-  /project
-  │
-  ├─ 1_3d_viewer/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ main.py
-  │ │
-  │ ├─ templates/
-  │ │ ├─ index.html
-  │ │ └─ viewer.html
-  │ ├─ static/
-  │ └─ uploads/
-  │
-  ├─ 2_data_analysis/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ main.py
-  │ │
-  │ ├─ templates/
-  │ │ ├─ index.html
-  │ │ └─ results.html
-  │ │
-  │ └─ static/
-  │ ├─ uploads/
-  │ └─ plots/
-  │
-  ├─ 3_sim_and_train/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ main.py
-  │ │
-  │ ├─ scenarios/
-  │ │ ├─ baseline_demo.json
-  │ │ ├─ liver_basic.json
-  │ │ └─ training_paths.json
-  │ │
-  │ ├─ static/
-  │ │ ├─ models/
-  │ │ │ └─ placeholder_model.glb
-  │ │ │
-  │ │ ├─ js/
-  │ │ │ ├─ sceneLoader.js
-  │ │ │ ├─ interaction.js
-  │ │ │ ├─ workflow.js
-  │ │ │ └─ metrics.js
-  │ │ │
-  │ │ └─ css/
-  │ │ └─ style.css
-  │ │
-  │ └─ templates/
-  │ ├─ index.html
-  │ ├─ simulator.html
-  │ └─ results.html
-  │
-  ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
-  │ │
-  │ ├── main_main.py # (Optional) Haupt-Einstiegspunkt für alle Module
-  │ │
-  │ ├── 1_data_upload_and_analysis/ # [Modul 1: Datenanalyse & Upload]
-  │ │ ├─ main.py # Logik für Upload und statistische Auswertung
-  │ │ └─ ...
-  │ │
-  │ ├── 2_model_evaluation/ # [Modul 2: Modell-Evaluation]
-  │ │ ├─ main.py # Logik für Metriken und Modell-Vergleich
-  │ │ └─ ...
-  │ │
-  │ ├── 3_sim_and_train/ # [Modul 3: Simulation & Training]
-  │ │ ├─ main.py # Logik für 3D-Ladeszenarien und Metrik-Erfassung
-  │ │ ├─ scenarios/ # JSON-Konfigurationen für Simulationen
-  │ │ ├─ static/
-  │ │ │ └─ models/ # 3D-Modelle (.glb) für die Simulation
-  │ │ └─ ...
-  │ │
-  │ └── 4_audio_anno_chat/ # [Modul 4: Audio-Annotation & Kollaboration]
-  │ ├─ main.py # Flask Backend (Upload, Dateiverwaltung & KI-Trigger)
-  │ │
-  │ ├─ requirements.txt # Flask, Whisper (für KI)
-  │ │
-  │ ├─ static/ # Frontend-Assets
-  │ │ ├─ uploads/ # Gespeicherte Audio-Dateien (.webm/.wav)
-  │ │ ├─ css/
-  │ │ │ └─ style.css
-  │ │ ├─ js/
-  │ │ │ ├─ recorder.js # Hauptlogik: MediaRecorder, Sicherheit, Upload
-  │ │ │ └─ visualizer.js # WaveSurfer.js Initialisierung
-  │ │
-  │ └─ templates/
-  │ └─ index.html # Die VoiceLog-GUI (Recorder & History)
-  │
-  ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ main.py
-  │ │
-  │ ├─ requirements.txt # Flask, openai-whisper, torch
-  │ │
-  │ ├─ static/ # Frontend-Assets (Audio-Uploads)
-  │ │
-  │ └─ templates/
-  │ └─ audio_anno_index.html # Audio-Recorder Interface
-  │
-  ├─ 5_ai/ [[erledigt]: funktioniert schon ganz gut]
-  │ ├─ main.py # Blueprint für KI-IFrame
-  │ │
-  │ └─ templates/ # Referenziert ../templates/ai_index.html
-  │
-  ├─ 6_wiki_trends/ [[erledigt]: funktioniert ganz gut]
-  │ ├─ main.py # RSS-Feed Parser
-  │ │
-  │ └─ templates/ # Referenziert ../templates/wiki_index.html
-  │
-  ├─ 7_com/ [[erledigt]: funktioniert ganz gut]
-  ├─ main.py # IoT-API-Endpunkte
-  │
-  └─ templates/ # Referenziert ../templates/com_index.html
-  ```
-
+```  
+project
+├─ 1_3d_viewer/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ templates/
+│ │ ├─ index.html
+│ │ └─ viewer.html
+│ ├─ static/
+│ └─ uploads/
+│
+├─ 2_data_analysis/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ templates/
+│ │ ├─ index.html
+│ │ └─ results.html
+│ │
+│ └─ static/
+│ ├─ uploads/
+│ └─ plots/
+│
+├─ 3_sim_and_train/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ scenarios/
+│ │ ├─ baseline_demo.json
+│ │ ├─ liver_basic.json
+│ │ └─ training_paths.json
+│ │
+│ ├─ static/
+│ │ ├─ models/
+│ │ │ └─ placeholder_model.glb
+│ │ │
+│ │ ├─ js/
+│ │ │ ├─ sceneLoader.js
+│ │ │ ├─ interaction.js
+│ │ │ ├─ workflow.js
+│ │ │ └─ metrics.js
+│ │ │
+│ │ └─ css/
+│ │ └─ style.css
+│ │
+│ └─ templates/
+│ ├─ index.html
+│ ├─ simulator.html
+│ └─ results.html
+│  
+├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
+│ │
+│ ├── main_app.py # (Optional) Haupt-Einstiegspunkt für alle Module
+│ │
+│ ├── 1_data_upload_and_analysis/ # [Modul 1: Datenanalyse & Upload]
+│ │ ├─ app.py # Logik für Upload und statistische Auswertung
+│ │ └─ ...
+│ │
+│ ├── 2_model_evaluation/ # [Modul 2: Modell-Evaluation]
+│ │ ├─ app.py # Logik für Metriken und Modell-Vergleich
+│ │ └─ ...
+│ │
+│ ├── 3_sim_and_train/ # [Modul 3: Simulation & Training]
+│ │ ├─ app.py # Logik für 3D-Ladeszenarien und Metrik-Erfassung
+│ │ ├─ scenarios/ # JSON-Konfigurationen für Simulationen
+│ │ ├─ static/
+│ │ │ └─ models/ # 3D-Modelle (.glb) für die Simulation
+│ │ └─ ...
+│ │
+│ └── 4_audio_anno_chat/ # [Modul 4: Audio-Annotation & Kollaboration]
+│ ├─ app.py # Flask Backend (Upload, Dateiverwaltung & KI-Trigger)
+│ │
+│ ├─ requirements.txt # Flask, Whisper (für KI)
+│ │
+│ ├─ static/ # Frontend-Assets
+│ │ ├─ uploads/ # Gespeicherte Audio-Dateien (.webm/.wav)
+│ │ ├─ css/
+│ │ │ └─ style.css
+│ │ ├─ js/
+│ │ │ ├─ recorder.js # Hauptlogik: MediaRecorder, Sicherheit, Upload
+│ │ │ └─ visualizer.js # WaveSurfer.js Initialisierung
+│ │  
+│ └─ templates/
+│ └─ index.html # Die VoiceLog-GUI (Recorder & History)
+│
+├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py
+│ │
+│ ├─ requirements.txt # Flask, openai-whisper, torch
+│ │
+│ ├─ static/ # Frontend-Assets (Audio-Uploads)
+│ │
+│ └─ templates/
+│ └─ audio_anno_index.html # Audio-Recorder Interface
+│
+├─ 5_ai/ [[erledigt]: funktioniert schon ganz gut]
+│ ├─ app.py # Blueprint für KI-IFrame
+│ │
+│ └─ templates/ # Referenziert ../templates/ai_index.html
+│
+├─ 6_wiki_trends/ [[erledigt]: funktioniert ganz gut]
+│ ├─ app.py # RSS-Feed Parser
+│ │
+│ └─ templates/ # Referenziert ../templates/wiki_index.html
+│
+├─ 7_com/ [[erledigt]: funktioniert ganz gut]
+├─ app.py # IoT-API-Endpunkte
+│
+└─ templates/ # Referenziert ../templates/com_index.html
 ```
 ---
 
 ---
 
-## Dokumentation ## [[anpassen]: nach jedem update]
+### VENV ! install ! Virtual Envirement
 
-README oder Installer im Projektordner mit Installations- und Erweiterungshinweisen (wie z.B richtige Three version für VPS Ubuntu).
+```bash
+python3 -m venv venv
 
----
-
----
-
-### erinnerung
-
-- Auf VPS - Flask-App starten: `bash    python3 main.py    `
-- Lokal - Flask-App starten: `bash    python3 main.py    `
-- Im Browser öffnen: `http://webseite.de:5000`
-- Dateien einfach mit FileZilla zwischen Windows und VPS austauschen.
 ```
+
+Wenn du bereits ein venv hast in `~/project_de/venv` , aktiviere es und installiere darin:
+
+```bash
+cd ~/project_de
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Nach der Installation starte die App mit:
+
+```bash
+source venv/bin/activate
+python app.py
+```
+
+---
+
+Darlegung der Modularen Technischen Tools im Web-Toolkit
+
+1. Module als KIS-Basis:
+Diese Module sind modular, webbasiert und laufen auf deinem eigenen Server (z. B. maazi.de/hp). Sie bilden bereits viele typische KIS-Funktionen ab und sind technisch offen für Erweiterungen und Schnittstellen.
+
+3D-Viewer Modelle
+Datenanalyse und Statistikmodul
+3D-Simulation und Trainingsszenarien
+Audio Annotation mit KI gestützte Analyse
+KI-Chatfunktionen und Analyse
+RSS-Feeds der medizinischen Technologie und Forschung
+Schnittstellen zu externen Geräten
+
+2. Skizze: Modull Integration in KIS-Moduls
+
+<p align="center">
+  <a href="static/KIS.svg"><img src="static/KIS.png" width="80%" height="80%"></a>
+</p>
+
+Modulare Plattform, die verschiedene medizinische Funktionen abbildet. Schnittstellen: APIs (REST/SOAP), HL7/FHIR und ISiK sorgen für den Datenaustausch mit externen Systemen (Labor, Radiologie, Geräte).
+Module: Die entwickelten Plug-ins sind typische KIS-Komponenten. Kommunikationsarten: Schnittstellen können uni- oder bidirektional Daten übertragen.
+Ziele: Interoperabilität (Kompatibilität mit anderen Systemen), Datensicherheit (TLS, OAuth, DSGVO), Automatisierung (weniger manuelle Arbeit).
