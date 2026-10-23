@@ -223,7 +223,8 @@ Integration: Erreichbar unter `/com/`, zeigt IoT-Konnektivität und erste AI-Int
 - Projektstruktur:
   ~/webseite_de/
   main.py [[anpassen]: Haupt Landingpage, Menü zu allen Modulen, funktioniert schon ganz gut, weitere Module Erstellen und einbinden]
-```  
+
+```
 project
 ├─ 1_3d_viewer/ [[erledigt]: funktioniert schon ganz gut]
 │ ├─ app.py
@@ -270,7 +271,7 @@ project
 │ ├─ index.html
 │ ├─ simulator.html
 │ └─ results.html
-│  
+│
 ├─ 4_audio_anno_chat/ [[erledigt]: funktioniert schon ganz gut]
 │ │
 │ ├── main_app.py # (Optional) Haupt-Einstiegspunkt für alle Module
@@ -302,7 +303,7 @@ project
 │ │ ├─ js/
 │ │ │ ├─ recorder.js # Hauptlogik: MediaRecorder, Sicherheit, Upload
 │ │ │ └─ visualizer.js # WaveSurfer.js Initialisierung
-│ │  
+│ │
 │ └─ templates/
 │ └─ index.html # Die VoiceLog-GUI (Recorder & History)
 │
@@ -331,6 +332,7 @@ project
 │
 └─ templates/ # Referenziert ../templates/com_index.html
 ```
+
 ---
 
 ---
@@ -362,7 +364,7 @@ python app.py
 Darlegung der Modularen Technischen Tools im Web-Toolkit
 
 1. Module als KIS-Basis:
-Diese Module sind modular, webbasiert und laufen auf deinem eigenen Server (z. B. [maazi.de/toolkit](https://maazi.de/toolkit)). Sie bilden bereits viele typische KIS-Funktionen ab und sind technisch offen für Erweiterungen und Schnittstellen.
+   Diese Module sind modular, webbasiert und laufen auf deinem eigenen Server (z. B. [maazi.de/toolkit](https://maazi.de/toolkit)). Sie bilden bereits viele typische KIS-Funktionen ab und sind technisch offen für Erweiterungen und Schnittstellen.
 
 3D-Viewer Modelle
 Datenanalyse und Statistikmodul
